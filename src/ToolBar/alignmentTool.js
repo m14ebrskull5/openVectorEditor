@@ -13,7 +13,8 @@ import { flatMap } from "lodash";
 import uniqid from "shortid";
 import { cloneDeep } from "lodash";
 import classNames from "classnames";
-
+// import pairwiseAlignment2 from "../src/exampleData/pairwiseAlignment2.json";
+import pairwiseAlignment2 from "../../demo/src/exampleData/pairwiseAlignment2.json";
 import ToolbarItem from "./ToolbarItem";
 import { connectToEditor } from "../withEditorProps";
 import withEditorProps from "../withEditorProps";
@@ -175,9 +176,9 @@ class AlignmentTool extends React.Component {
     // const j5server = process.env.REMOTE_J5 || "http://j5server.teselagen.com"
 
     window.toastr.success("Alignment submitted.");
-    const replaceProtocol = (url) => {
-      return url.replace("http://", window.location.protocol + "//");
-    };
+    // const replaceProtocol = (url) => {
+    //   return url.replace("http://", window.location.protocol + "//");
+    // };
 
     const seqInfoToSend = seqsToAlign.map(({ sequence, name, id }) => {
       return {
@@ -186,15 +187,17 @@ class AlignmentTool extends React.Component {
         id
       };
     });
-
-    const {
+    let {
       alignedSequences: _alignedSequences,
       pairwiseAlignments,
       alignmentsToRefSeq
     } = await (
-      await fetch({
-        url: replaceProtocol("http://j5server.teselagen.com/alignment/run"),
+      await fetch("http://localhost:8080", {
+        // url: "http://localhost:8080",
         method: "post",
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({
           //only send over the bear necessities :)
           sequencesToAlign: seqInfoToSend,
@@ -204,42 +207,52 @@ class AlignmentTool extends React.Component {
       })
     ).json();
 
+    pairwiseAlignments = [...pairwiseAlignment2.pairwiseAlignments];
     // alignmentsToRefSeq set to alignedSequences for now
     let alignedSequences = _alignedSequences;
+    alignedSequences = [
+      {
+        //JBEI sequence 'GFPuv58'
+        chromatogramData: "ab1ParsedGFPuv58",
+        name: "0_a",
+        sequenceData: {
+          id: "2",
+          name: "GFPuv58",
+          sequence:
+            "GTTCAATGCTTTTCCCGTTATCCGGATCATATGAAACGGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAACGCACTATATCTTTCAAAGATGACGGGAACTACAAGACGCGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATCGTATCGAGTT"
+        },
+        alignmentData: {
+          id: "2",
+          sequence:
+            "GTTCAA--TGCTTTTCCCGTTATCCGGATCATATGAAACGGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACA---GGAACGCACTATATCTTTCAAAGATGACGGGAACTACAAGACGCGTGCTGAAGTCAAGTTTGAAGGTGATAC--CCTTGTTAATCGTATCGAGTT--"
+        }
+      }
+    ];
     if (alignmentsToRefSeq) {
       alignedSequences = alignmentsToRefSeq;
     }
     if (!alignedSequences && !pairwiseAlignments)
       window.toastr.error("Error running sequence alignment!");
+
     //set the alignment to loading
     upsertAlignmentRun({
       id: alignmentId,
-      pairwiseAlignments:
-        pairwiseAlignments &&
-        pairwiseAlignments.map((alignedSequences, topIndex) => {
-          return alignedSequences.map((alignmentData, innerIndex) => {
-            return {
-              sequenceData: seqsToAlign[innerIndex > 0 ? topIndex + 1 : 0],
-              alignmentData,
-              chromatogramData: seqsToAlign[innerIndex].chromatogramData
-            };
-          });
-        }),
-      alignmentTracks:
-        alignedSequences &&
-        alignedSequences.map((alignmentData) => {
-          return {
-            sequenceData:
-              seqsToAlign[
-                alignmentData.name.slice(0, alignmentData.name.indexOf("_"))
-              ],
-            alignmentData,
-            chromatogramData:
-              seqsToAlign[
-                alignmentData.name.slice(0, alignmentData.name.indexOf("_"))
-              ].chromatogramData
-          };
-        })
+      pairwiseAlignments
+      // alignmentTracks:
+      //   alignedSequences &&
+      //   alignedSequences.map((alignmentData) => {
+      //     return {
+      //       sequenceData:
+      //         seqsToAlign[
+      //         alignmentData.name.slice(0, alignmentData.name.indexOf("_"))
+      //         ],
+      //       alignmentData,
+      //       chromatogramData:
+      //         seqsToAlign[
+      //           alignmentData.name.slice(0, alignmentData.name.indexOf("_"))
+      //         ].chromatogramData
+      //     };
+      //   })
       // alignmentTracks:
       //   alignedSequences &&
       //   alignedSequences.map((alignmentData, i) => {

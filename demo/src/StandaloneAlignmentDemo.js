@@ -5,7 +5,7 @@ import { times } from "lodash";
 import { generateSequenceData } from "@teselagen/sequence-utils";
 
 const exampleAlignmentData = {
-  alignmentTracks: times(10).map(() => {
+  alignmentTracks: times(2).map(() => {
     return {
       sequenceData: {
         ...generateSequenceData(10)
@@ -16,7 +16,6 @@ const exampleAlignmentData = {
     };
   })
 };
-
 export default class StandaloneAlignmentDemo extends React.Component {
   state = {
     isDialogOpen: false

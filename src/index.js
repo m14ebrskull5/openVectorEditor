@@ -3,7 +3,7 @@ import "./addOnGlobals";
 import { FocusStyleManager } from "@blueprintjs/core";
 import { showContextMenu } from "teselagen-react-components";
 import "./createVectorEditor";
-import "./style.css";
+// import "./style.css";
 export { getUserGroupLabel } from "./CutsiteFilter/AdditionalCutsiteInfoDialog";
 
 window.tgCreateMenu = showContextMenu;
