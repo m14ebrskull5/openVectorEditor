@@ -1,0 +1,43 @@
+{
+  "id": "msaAlignment_1",
+  "alignmentType": "Multiple Sequence Alignment 11111",
+  "alignmentTracks": [
+
+    {
+      "sequenceData": {
+        "id": "a4daa28a-7745-4edf-af2b-9038b8e5aa6f",
+        "name": "F05210",
+        "sequence":
+          "acttt"
+      },
+      "alignmentData": {
+        "id": "a52ed7db-6c03-4ec0-a1c7-6a0fdbf87603",
+        "name": "F05219",
+        "sequence":
+          "--acttt",
+        "description": "|3558|linear",
+        "type": "DNA",
+        "size": 3558,
+        "circular": false
+      }
+    },
+    {
+      "sequenceData": {
+        "id": "0dcdb02b-f982-4697-80ef-53154802bf4f",
+        "name": "F05211",
+        "sequence":
+          "taactta"
+      },
+      "alignmentData": {
+        "id": "66091798-e619-4c98-b047-4ad9cce5215e",
+        "name": "F05220",
+        "sequence":
+          "taactta",
+        "type": "DNA",
+        "size": 3558,
+        "circular": false
+      }
+    }
+    
+  ]
+}

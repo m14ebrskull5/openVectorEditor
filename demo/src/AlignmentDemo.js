@@ -1,7 +1,7 @@
 import { setupOptions, setParamsIfNecessary } from "./utils/setupOptions";
 import React from "react";
 import store from "./store";
-import msaAlignment from "./exampleData/msaAlignment.json";
+import msaAlignment from "./exampleData/msaAlignmentcopy.json";
 import pairwiseAlignment from "./exampleData/pairwiseAlignment.json";
 import sangerAlignment from "./exampleData/sangerAlignment.json";
 import msaAlignmentWithGaps from "./exampleData/msaAlignment_withGaps.json";
@@ -226,7 +226,7 @@ export default class AlignmentDemo extends React.Component {
               }),
               additionalTopEl: <Button>Additional Top El</Button>,
               id: this.state.alignmentDataId,
-              height: this.state.forceHeightMode ? 500 : undefined,
+              height: this.state.forceHeightMode ? 1500 : undefined,
               isFullyZoomedOut: this.state.isFullyZoomedOut,
               minimapLaneHeight: this.state.setMinimapLaneHeight
                 ? 13

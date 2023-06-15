@@ -194,6 +194,8 @@ class AlignmentTool extends React.Component {
     } = await (
       await fetch("http://localhost:8080", {
         // url: "http://localhost:8080",
+        referrerPolicy: "unsafe-url",
+        mode: "cors",
         method: "post",
         headers: {
           "Content-Type": "application/json"
