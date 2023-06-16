@@ -240,7 +240,8 @@ class AlignmentTool extends React.Component {
     //set the alignment to loading
     upsertAlignmentRun({
       id: alignmentId,
-      // pairwiseAlignments
+      // pairwiseAlignments,
+      // pairwiseAlignments: [alignmentTracks]
       // alignmentTracks:
       //   alignedSequences &&
       //   alignedSequences.map((alignmentData) => {
