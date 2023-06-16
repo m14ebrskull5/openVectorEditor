@@ -190,7 +190,8 @@ class AlignmentTool extends React.Component {
     let {
       alignedSequences: _alignedSequences,
       pairwiseAlignments,
-      alignmentsToRefSeq
+      alignmentsToRefSeq,
+      alignmentTracks
     } = await (
       await fetch("http://localhost:8080", {
         // url: "http://localhost:8080",
@@ -239,7 +240,7 @@ class AlignmentTool extends React.Component {
     //set the alignment to loading
     upsertAlignmentRun({
       id: alignmentId,
-      pairwiseAlignments
+      // pairwiseAlignments
       // alignmentTracks:
       //   alignedSequences &&
       //   alignedSequences.map((alignmentData) => {
@@ -255,15 +256,7 @@ class AlignmentTool extends React.Component {
       //         ].chromatogramData
       //     };
       //   })
-      // alignmentTracks:
-      //   alignedSequences &&
-      //   alignedSequences.map((alignmentData, i) => {
-      //     return {
-      //       sequenceData: addedSequencesToUse[i],
-      //       alignmentData,
-      //       chromatogramData: addedSequencesToUse[i].chromatogramData
-      //     };
-      //   })
+      alignmentTracks
     });
   };
 

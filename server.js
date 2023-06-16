@@ -9,7 +9,7 @@ const { func } = require('prop-types');
 function saveSeq(sequencesToAlign, file) {
     sequencesToAlign.forEach((item) => {
         console.log(item)
-        fs.writeFileSync(file, ">" + item.name + "\n",  {
+        fs.writeFileSync(file, ">" + item.name + "\n", {
             flag: 'a'
         })
         fs.writeFileSync(file, item.sequence + "\n", {
@@ -30,23 +30,34 @@ function runMuscle(file) {
 }
 function parseAlignment(content) {
     let s = content.split(">").filter(i => i).map(i => i.split('\n').filter(i => i))
-    console.log(s)
+    return s
 }
 app.use(cors());
 app.use(bodyParser.json())
 // respond with "hello world" when a GET request is made to the homepage
 app.post('/', function (req, res) {
     console.log(req.body)
-    var file = "./seq/" +uuidv4() + '.fasta';
+    var file = "./seq/" + uuidv4() + '.fasta';
     saveSeq(req.body.sequencesToAlign, file)
     var output = runMuscle(file)
-    var alignResult= fs.readFileSync(output)
+    var alignResult = fs.readFileSync(output)
     var alignParsedResult = parseAlignment(alignResult.toString())
     console.log(alignResult.toString())
     res.send({
-        alignedSequences: [],
-        pairwiseAlignments: [],
-        alignmentsToRefSeq: false
+        "id": "msaAlignment_1",
+        "alignmentType": "Multiple Sequence Alignment 11111",
+        alignmentTracks: alignParsedResult.map((i,index) => {
+            return {
+                sequenceData: {
+                    "name": req.body.sequencesToAlign[index].name,
+                    "sequence": req.body.sequencesToAlign[index].sequence
+                },
+                alignmentData: {
+                    "name": i[0],
+                    "sequence": i[1]
+                }
+            }
+        })
     })
 })
 
