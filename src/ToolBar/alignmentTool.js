@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Button, Intent, Classes, Callout } from "@blueprintjs/core";
+import { Icon, Button, Intent, Classes } from "@blueprintjs/core";
 import {
   FileUploadField,
   TextareaField,
@@ -50,8 +50,7 @@ class AlignmentToolDropdown extends React.Component {
     const {
       savedAlignments = [],
       hasSavedAlignments,
-      toggleDropdown,
-      sequenceData
+      toggleDropdown
     } = this.props;
     return (
       <div>
@@ -65,7 +64,7 @@ class AlignmentToolDropdown extends React.Component {
                 createNewAlignment: this.props.createNewAlignment,
                 upsertAlignmentRun: this.props.upsertAlignmentRun,
                 initialValues: {
-                  addedSequences: [{ ...sequenceData, isTemplate: true }]
+                  addedSequences: []
                 }
               }
             });
@@ -75,10 +74,10 @@ class AlignmentToolDropdown extends React.Component {
         </Button>
         <br></br>
         <br></br>
-        <Callout intent="warning">
+        {/* <Callout intent="warning">
           Note: This tool requires an alignment server to be hooked up for it to
           work properly. It will NOT work in the OVE demo page.
-        </Callout>
+        </Callout> */}
         <div className="vespacer" />
         {hasSavedAlignments && (
           <div>
