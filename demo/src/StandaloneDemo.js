@@ -192,15 +192,15 @@ export default class StandaloneDemo extends React.Component {
           [
             {
               // fullScreen: true,
-              active: true,
+              // active: true,
               id: "circular",
               name: "Circular Map"
             },
             {
               id: "jbeiAlignment1",
               type: "alignment",
-              name: "Jbei Alignment p1243124"
-              // active: true,
+              name: "Jbei Alignment p1243124 AAAAAAA",
+              active: true
               // fullScreen: true
             },
             {

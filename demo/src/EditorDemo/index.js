@@ -724,7 +724,7 @@ ToolBarProps: {
                         [
                           {
                             id: "rail",
-                            name: "Linear Map",
+                            name: "Linear Map 222 ",
                             active: true
                           },
                           {

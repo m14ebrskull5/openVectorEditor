@@ -1033,7 +1033,7 @@ export class AlignmentView extends React.Component {
 
   render() {
     const charWidthInLinearView = this.getCharWidthInLinearView();
-    const {
+    let {
       alignmentTracks = [],
       height,
       minimapLaneHeight,
@@ -1056,6 +1056,7 @@ export class AlignmentView extends React.Component {
       handleAlignmentRename,
       alignmentVisibilityToolOptions
     } = this.props;
+    height = height - 150;
     const sequenceLength = this.getMaxLength();
     if (
       !alignmentTracks ||

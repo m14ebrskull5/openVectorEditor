@@ -234,26 +234,15 @@ export default createReducer(
       {
         id: "circular",
         name: "Circular Map",
-        active: true
-        //   canClose: true
-      },
-      {
-        id: "rail",
-        name: "Linear Map",
-        active: false
+        active: true,
+        canClose: true
       }
-    ],
-    [
-      {
-        id: "sequence",
-        name: "Sequence Map",
-        active: true
-      },
-      {
-        id: "properties",
-        name: "Properties",
-        active: false
-      }
+
+      // {
+      //   id: "sequence",
+      //   name: "Sequence Map",
+      //   active: true
+      // }
     ]
   ]
 );
