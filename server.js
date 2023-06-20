@@ -60,7 +60,6 @@ app.post('/', function (req, res) {
             const sequence = i.slice(1, i.length -1).join("")
             let findItemIndex = req.body.sequencesToAlign.findIndex(item => item.name == name)
             let findItem = req.body.sequencesToAlign[findItemIndex]
-            console.log(findItemIndex, findItem)
             return {
                 sequenceData: {
                     "name": findItem.name,

@@ -23,7 +23,6 @@ import AlignmentDemo from "./AlignmentDemo";
 import VersionHistoryView from "../../src/VersionHistoryView";
 import EditorDemo from "./EditorDemo";
 import "./style.css";
-import VersionSwitcher from "./VersionSwitcher";
 
 const Demo = () => {
   const [isDarkMode, setDarkMode] = useState(
@@ -128,23 +127,7 @@ const Demo = () => {
               minimal
               icon="menu"
             ></Button>
-            <VersionSwitcher></VersionSwitcher>
-            <a
-              href="https://github.com/TeselaGen/ove-electron#installation-instructions"
-              style={{ marginTop: 5, marginLeft: 10 }}
-            >
-              This is a developer demo. Get the App?
-            </a>{" "}
-            <div style={{ paddingTop: 3 }}>
-              <iframe
-                src="https://ghbtns.com/github-btn.html?user=teselagen&repo=openvectoreditor&type=star&count=true"
-                frameBorder="0"
-                scrolling="0"
-                width="150"
-                height="20"
-                title="GitHub"
-              ></iframe>
-            </div>
+
             <Tooltip
               content={isDarkMode ? "Light Theme" : "Dark Theme"}
               key="theme"

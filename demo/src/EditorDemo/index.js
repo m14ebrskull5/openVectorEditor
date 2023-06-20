@@ -5,7 +5,7 @@ import {
 } from "@teselagen/sequence-utils";
 import React from "react";
 import { isRangeOrPositionWithinRange } from "@teselagen/range-utils";
-import isMobile from "is-mobile";
+// import isMobile from "is-mobile";
 
 import store from "./../store";
 import { updateEditor, actions } from "../../../src/";
@@ -70,7 +70,7 @@ const defaultState = {
   clickOverridesExample: false,
   showAvailability: true,
   showCicularViewInternalLabels: true,
-  showDemoOptions: !isMobile(),
+  showDemoOptions: false,
   shouldAutosave: false,
   generatePng: false,
   allowPanelTabDraggable: true,
