@@ -48,18 +48,19 @@ app.post('/', function (req, res) {
     let file = "./seq/" + uuidv4() + '.fasta';
     saveSeq(req.body.sequencesToAlign, file)
     let output = runMuscle(file)
-    console.log(output)
+    // console.log(output)
     let alignResult = fs.readFileSync(output)
     let alignParsedResult = parseAlignment(alignResult.toString())
-    console.log(alignResult.toString())
+    // console.log(alignResult.toString())
     res.send({
         "id": "msaAlignment_1",
         "alignmentType": "Multiple Sequence Alignment 11111",
         alignmentTracks: alignParsedResult.map((i,index) => {
             const name = i[0]
             const sequence = i.slice(1, i.length -1).join("")
-            let findItemIndex = req.body.sequencesToAlign.findIndex(i => i.name == name)
-            let findItem = alignParsedResult[findItemIndex]
+            let findItemIndex = req.body.sequencesToAlign.findIndex(item => item.name == name)
+            let findItem = req.body.sequencesToAlign[findItemIndex]
+            console.log(findItemIndex, findItem)
             return {
                 sequenceData: {
                     "name": findItem.name,
