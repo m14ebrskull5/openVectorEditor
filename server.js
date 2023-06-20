@@ -1,8 +1,11 @@
-var express = require('express')
+let express = require('express')
 const { execSync } = require('child_process');
-var app = express()
-var fs = require('fs')
-var bodyParser = require('body-parser')
+const os = require('os')
+const ostype = os.type()
+console.log("ostype", ostype)
+let app = express()
+let fs = require('fs')
+let bodyParser = require('body-parser')
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const { func } = require('prop-types');
@@ -18,10 +21,16 @@ function saveSeq(sequencesToAlign, file) {
     })
 }
 function runMuscle(file) {
-    let out = './out/' + uuidv4()
+    const out = './out/' + uuidv4()
     try {
-        const output = execSync('.\\mus.exe -align ' + file + ' -output ' + out);
-        console.log('命令执行结果:', output.toString());
+        if(ostype === 'Windows_NT') {
+            const output = execSync('.\\mus.exe -align ' + file + ' -output ' + out);
+            console.log('命令执行结果:', output.toString());
+        } else {
+            const output = execSync('./mus_linux -align ' + file + ' -output ' + out);
+            console.log('命令执行结果:', output.toString());
+        }
+        
     } catch (err) {
         console.error('执行命令时发生错误:', err);
         return null
@@ -37,11 +46,11 @@ app.use(bodyParser.json())
 // respond with "hello world" when a GET request is made to the homepage
 app.post('/', function (req, res) {
     console.log(req.body)
-    var file = "./seq/" + uuidv4() + '.fasta';
+    let file = "./seq/" + uuidv4() + '.fasta';
     saveSeq(req.body.sequencesToAlign, file)
-    var output = runMuscle(file)
-    var alignResult = fs.readFileSync(output)
-    var alignParsedResult = parseAlignment(alignResult.toString())
+    let output = runMuscle(file)
+    let alignResult = fs.readFileSync(output)
+    let alignParsedResult = parseAlignment(alignResult.toString())
     console.log(alignResult.toString())
     res.send({
         "id": "msaAlignment_1",
