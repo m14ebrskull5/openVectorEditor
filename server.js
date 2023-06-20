@@ -45,10 +45,10 @@ app.use(cors());
 app.use(bodyParser.json())
 // respond with "hello world" when a GET request is made to the homepage
 app.post('/', function (req, res) {
-    console.log(req.body)
     let file = "./seq/" + uuidv4() + '.fasta';
     saveSeq(req.body.sequencesToAlign, file)
     let output = runMuscle(file)
+    console.log(output)
     let alignResult = fs.readFileSync(output)
     let alignParsedResult = parseAlignment(alignResult.toString())
     console.log(alignResult.toString())
@@ -56,14 +56,18 @@ app.post('/', function (req, res) {
         "id": "msaAlignment_1",
         "alignmentType": "Multiple Sequence Alignment 11111",
         alignmentTracks: alignParsedResult.map((i,index) => {
+            const name = i[0]
+            const sequence = i.slice(1, i.length -1).join("")
+            let findItemIndex = req.body.sequencesToAlign.findIndex(i => i.name == name)
+            let findItem = alignParsedResult[findItemIndex]
             return {
                 sequenceData: {
-                    "name": req.body.sequencesToAlign[index].name,
-                    "sequence": req.body.sequencesToAlign[index].sequence
+                    "name": findItem.name,
+                    "sequence": findItem.sequence
                 },
                 alignmentData: {
-                    "name": i[0],
-                    "sequence": i[1]
+                    name,
+                    sequence
                 }
             }
         })

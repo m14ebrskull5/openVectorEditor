@@ -192,7 +192,7 @@ class AlignmentTool extends React.Component {
       alignmentsToRefSeq,
       alignmentTracks
     } = await (
-      await fetch("http://62.234.98.190:8080/", {
+      await fetch("http://127.0.0.1:8080/", {
         referrerPolicy: "unsafe-url",
         mode: "cors",
         method: "post",
