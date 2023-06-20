@@ -57,7 +57,7 @@ app.post('/', function (req, res) {
         "alignmentType": "Multiple Sequence Alignment 11111",
         alignmentTracks: alignParsedResult.map((i,index) => {
             const name = i[0]
-            const sequence = i.slice(1, i.length -1).join("")
+            const sequence = i.slice(1, i.length).join("")
             let findItemIndex = req.body.sequencesToAlign.findIndex(item => item.name == name)
             let findItem = req.body.sequencesToAlign[findItemIndex]
             return {

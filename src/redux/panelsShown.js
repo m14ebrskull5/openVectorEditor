@@ -114,6 +114,9 @@ export default createReducer(
           });
         })
       ) {
+        if (state.length === 0) {
+          return [[panelToAdd]];
+        }
         return state.map((panelGroup, index) => {
           if (index === 0) return [panelToAdd, ...panelGroup];
           return panelGroup;
@@ -230,20 +233,19 @@ export default createReducer(
     }
   },
   [
-    [
-      {
-        id: "circular",
-        name: "Circular Map",
-        active: true,
-        canClose: true
-      }
-
-      // {
-      //   id: "sequence",
-      //   name: "Sequence Map",
-      //   active: true
-      // }
-    ]
+    // [
+    // {
+    //   id: "circular",
+    //   name: "Circular Map",
+    //   active: true,
+    //   canClose: true
+    // },
+    // {
+    //   id: "sequence",
+    //   name: "Sequence Map",
+    //   active: true
+    // }
+    // ]
   ]
 );
 

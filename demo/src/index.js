@@ -1,7 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Provider } from "react-redux";
-import { HashRouter as Router, Route, Link, Redirect } from "react-router-dom";
-import { Button, Drawer, Tooltip } from "@blueprintjs/core";
+import { HashRouter as Router, Route, Redirect } from "react-router-dom";
 
 import store from "./store";
 import { render } from "react-dom";
@@ -25,57 +24,6 @@ import EditorDemo from "./EditorDemo";
 import "./style.css";
 
 const Demo = () => {
-  const [isDarkMode, setDarkMode] = useState(
-    document.body.className.includes("bp3-dark")
-  );
-  const [isSidebarOpen, setSidebarOpen] = useState();
-
-  const changeDarkMode = () => {
-    setDarkMode(!isDarkMode);
-    document.body.classList.toggle("bp3-dark");
-  };
-
-  const links = useMemo(() => {
-    const links = [
-      { name: "Editor", url: "Editor" },
-      { name: "Standalone", url: "Standalone" },
-      { name: "VersionHistoryView", url: "VersionHistoryView" },
-      { name: "StandaloneAlignment", url: "StandaloneAlignment" },
-      { name: "Alignment", url: "Alignment" },
-      { name: "SimpleCircularOrLinearView", url: "SimpleCircularOrLinearView" },
-      { name: "DigestTool", url: "DigestTool" },
-      { name: "EnzymeViewer", url: "EnzymeViewer" },
-      { name: "CircularView", url: "CircularView" },
-      { name: "RowView", url: "RowView" },
-      { name: "LinearView", url: "LinearView" },
-      { name: "ToolBar", url: "ToolBar" }
-    ].map(({ url, name }) => {
-      return (
-        <div key={name} style={{ height: 20, marginLeft: 10 }}>
-          <Link to={url}> {name} </Link>
-        </div>
-      );
-    });
-    links.push(
-      <a
-        key="umdDemo"
-        style={{ marginLeft: 10 }}
-        href={
-          window.location.href.includes("localhost")
-            ? `${window.location.origin}/UMDDemo.html`
-            : "http://teselagen.github.io/openVectorEditor/UMDDemo.html"
-        }
-      >
-        UMD demo
-      </a>
-    );
-    return links.map((l, i) => (
-      <span onClick={() => setSidebarOpen(false)} key={i}>
-        {l}
-      </span>
-    ));
-  }, []);
-
   return (
     <Provider store={store}>
       <Router>
@@ -88,59 +36,6 @@ const Demo = () => {
             overflow: "hidden"
           }}
         >
-          <Drawer
-            size={Drawer.SIZE_SMALL}
-            isOpen={isSidebarOpen}
-            onClose={() => {
-              setSidebarOpen(false);
-            }}
-            position="left"
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                width: "100%"
-              }}
-            >
-              <Button
-                onClick={() => {
-                  setSidebarOpen(false);
-                }}
-                minimal
-                icon="cross"
-              ></Button>
-            </div>
-            {links}
-          </Drawer>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              flexShrink: 0
-            }}
-          >
-            <Button
-              onClick={() => setSidebarOpen(!isSidebarOpen)}
-              intent="primary"
-              minimal
-              icon="menu"
-            ></Button>
-
-            <Tooltip
-              content={isDarkMode ? "Light Theme" : "Dark Theme"}
-              key="theme"
-            >
-              <Button
-                data-test="tg-toggle-dark-mode"
-                icon={isDarkMode ? "flash" : "moon"}
-                intent={isDarkMode ? "warning" : undefined}
-                minimal
-                onClick={changeDarkMode}
-              />
-            </Tooltip>
-          </div>
           <Route exact path="/" render={() => <Redirect to="/Editor" />} />
           <Route
             render={({ history }) => {

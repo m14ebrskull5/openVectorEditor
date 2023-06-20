@@ -354,7 +354,7 @@ export class Editor extends React.Component {
       annotationsToSupport,
       withRotateCircularView = true,
       withZoomCircularView = true,
-      withZoomLinearView = true,
+      withZoomLinearView = false,
       displayMenuBarAboveTools = true,
       updateSequenceData,
       readOnly,
@@ -599,7 +599,7 @@ export class Editor extends React.Component {
           isInsideEditor //pass this prop to let the sub components know they're being rendered as an editor tab
         />
       ) : (
-        <div> No Panel Found!</div>
+        <div> </div>
       );
 
       const showTabRightClickContextMenu = (e, id) => {

@@ -186,13 +186,19 @@ class AlignmentTool extends React.Component {
         id
       };
     });
+    let server;
+    if (import.meta.env.MODE === "development") {
+      server = "http://127.0.0.1:8080/";
+    } else {
+      server = "http://62.234.98.190:8080/";
+    }
     let {
       alignedSequences: _alignedSequences,
       pairwiseAlignments,
       alignmentsToRefSeq,
       alignmentTracks
     } = await (
-      await fetch("http://127.0.0.1:8080/", {
+      await fetch(server, {
         referrerPolicy: "unsafe-url",
         mode: "cors",
         method: "post",

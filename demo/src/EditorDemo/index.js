@@ -436,7 +436,7 @@ This feature requires beforeSequenceInsertOrDelete toggle to be true to be enabl
     const dropTarget = document.querySelector(".veTabProperties")
           dragMock.dragStart(dragSource).dragEnter(dropTarget).dragOver(dropTarget).delay(500).dragEnd()
         }}>click me!</button> */}
-        <div style={{ width: 250 }}>
+        {/* <div style={{ width: 250 }}>
           {renderToggle({
             that: this,
             alwaysShow: true,
@@ -444,7 +444,7 @@ This feature requires beforeSequenceInsertOrDelete toggle to be true to be enabl
             label: "Show Demo Options",
             hotkey: `cmd+'`
           })}
-        </div>
+        </div> */}
 
         <div
           style={{
