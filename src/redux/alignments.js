@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   tidyUpSequenceData /* generateSequenceData */,
   condensePairwiseAlignmentDifferences
@@ -8,7 +10,7 @@ import shortid from "shortid";
 import addDashesForMatchStartAndEndForTracks from "./utils/addDashesForMatchStartAndEndForTracks";
 
 import { /* createReducer, */ createAction } from "redux-act";
-// import { omit } from "lodash";
+import { omit } from "lodash";
 
 const alignmentAnnotationSettings = {
   axis: true,
@@ -306,12 +308,16 @@ function checkForIssues(alignmentTracks, alignmentType) {
   ) {
     return;
   }
-
   const alignmentTrackLength = alignmentTracks[0].alignmentData.sequence.length;
   let hasError;
+  console.log(alignmentTracks);
   alignmentTracks.some((track) => {
-    if (track.alignmentData.sequence.length !== alignmentTrackLength) {
-      console.error("incorrect length", alignmentTracks);
+    console.log(track.alignmentData.sequence.length);
+    if (
+      track.alignmentData.sequence &&
+      track.alignmentData.sequence.length !== alignmentTrackLength
+    ) {
+      // console.error("incorrect length", alignmentTracks);
 
       return "incorrect length";
     }

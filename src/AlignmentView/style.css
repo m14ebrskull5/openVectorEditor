@@ -66,11 +66,16 @@
 .alignmentView .veSelectionLayer {
   top: 0;
 }
+.alignmentView {
+  margin: 10px 10px 0;
+  height: 500px;
+}
 
 .veTracksAndAlignmentHolder {
   position: relative;
   width: fit-content;
   height: fit-content;
+  /* margin: 0 20px 0; */
 }
 /* .isTrackDragging.veTracksAndAlignmentHolder {
   transform: none !important;

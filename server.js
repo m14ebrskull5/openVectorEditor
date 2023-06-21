@@ -1,11 +1,14 @@
-let express = require('express')
+/* eslint-disable eqeqeq */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
+const express = require('express')
 const { execSync } = require('child_process');
 const os = require('os')
 const ostype = os.type()
 console.log("ostype", ostype)
-let app = express()
-let fs = require('fs')
-let bodyParser = require('body-parser')
+const app = express()
+const fs = require('fs')
+const bodyParser = require('body-parser')
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const { func } = require('prop-types');
@@ -38,36 +41,41 @@ function runMuscle(file) {
     return out
 }
 function parseAlignment(content) {
-    let s = content.split(">").filter(i => i).map(i => i.split('\n').filter(i => i))
+    const s = content.split(">").filter(i => i).map(i => i.split('\n').filter(i => i))
     return s
 }
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors());
 app.use(bodyParser.json())
 // respond with "hello world" when a GET request is made to the homepage
 app.post('/', function (req, res) {
-    let file = "./seq/" + uuidv4() + '.fasta';
+    const file = "./seq/" + uuidv4() + '.fasta';
     saveSeq(req.body.sequencesToAlign, file)
-    let output = runMuscle(file)
+    const output = runMuscle(file)
     // console.log(output)
-    let alignResult = fs.readFileSync(output)
-    let alignParsedResult = parseAlignment(alignResult.toString())
+    const alignResult = fs.readFileSync(output)
+    const alignParsedResult = parseAlignment(alignResult.toString())
     // console.log(alignResult.toString())
     res.send({
         alignmentType: "Multiple Sequence Alignment",
-        alignmentTracks: alignParsedResult.map((i) => {
-            const name = i[0]
-            const sequence = i.slice(1, i.length).join("")
-            let findItemIndex = req.body.sequencesToAlign.findIndex(item => item.name == name)
-            let findItem = req.body.sequencesToAlign[findItemIndex]
+        alignmentTracks: req.body.sequencesToAlign.map((i) => {
+            const name = i.name
+            const sequence = i.sequence
+            const findItemIndex = alignParsedResult.findIndex(item => item[0] == name)
+            const findItem = alignParsedResult[findItemIndex]
             return {
                 sequenceData: {
-                    ...findItem,
-                    "name": findItem.name,
-                    "sequence": findItem.sequence
+                    ...i,
+                    name: findItem[0],
+                    sequence,
+                    
                 },
+                chromatogramData: i.chromatogramData?
+                    i.chromatogramData:undefined,
                 alignmentData: {
                     name,
-                    sequence
+                    sequence: findItem.slice(1, i.length).join("")
                 }
             }
         })
