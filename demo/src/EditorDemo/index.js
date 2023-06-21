@@ -1,8 +1,5 @@
 import { Button, Icon, InputGroup } from "@blueprintjs/core";
-import {
-  generateSequenceData,
-  tidyUpSequenceData
-} from "@teselagen/sequence-utils";
+import { generateSequenceData } from "@teselagen/sequence-utils";
 import React from "react";
 import { isRangeOrPositionWithinRange } from "@teselagen/range-utils";
 // import isMobile from "is-mobile";
@@ -13,9 +10,7 @@ import { updateEditor, actions } from "../../../src/";
 import Editor from "../../../src/Editor";
 import renderToggle from "./../utils/renderToggle";
 import { setupOptions, setParamsIfNecessary } from "./../utils/setupOptions";
-import exampleSequenceData from "./../exampleData/exampleSequenceData";
 import AddEditFeatureOverrideExample from "./AddEditFeatureOverrideExample";
-import exampleProteinData from "../exampleData/exampleProteinData";
 import { connectToEditor } from "../../../src";
 import { showConfirmationDialog } from "teselagen-react-components";
 import {
@@ -113,8 +108,8 @@ export default class EditorDemo extends React.Component {
       return store.getState().VectorEditor["DemoEditor"];
     };
     updateEditor(store, "DemoEditor", {
-      readOnly: false,
-      sequenceData: exampleSequenceData
+      readOnly: false
+      // sequenceData: exampleSequenceData
     });
   }
   componentDidUpdate() {
@@ -587,53 +582,7 @@ certain dna specific tools and annotations are automatically disabled when isPro
 
 
                 `,
-                hook: (val) => {
-                  if (val === "Protein") {
-                    updateEditor(store, "DemoEditor", {
-                      readOnly: false,
-                      sequenceData: tidyUpSequenceData(exampleProteinData, {
-                        convertAnnotationsFromAAIndices: true
-                      })
-                    });
-                  } else if (val === "RNA") {
-                    updateEditor(store, "DemoEditor", {
-                      readOnly: false,
-                      sequenceData: { ...exampleSequenceData, isRna: true }
-                    });
-                  } else if (val === "Oligo") {
-                    updateEditor(store, "DemoEditor", {
-                      readOnly: false,
-                      sequenceData: {
-                        sequence:
-                          "cccccttttttttcacacactactatattagtgagagagacccaca",
-                        isOligo: true,
-                        circular: false
-                      }
-                    });
-                  } else if (val === "mixedRnaAndDna") {
-                    updateEditor(store, "DemoEditor", {
-                      readOnly: false,
-                      sequenceData: tidyUpSequenceData(
-                        {
-                          ...exampleSequenceData,
-                          sequence: "uuuu" + exampleSequenceData.sequence,
-                          isMixedRnaAndDna: true
-                        },
-                        {}
-                      )
-                    });
-                  } else {
-                    if (
-                      this.state.sequenceLength !== 5299 ||
-                      !this.state.sequenceLength
-                    ) {
-                      updateEditor(store, "DemoEditor", {
-                        readOnly: false,
-                        sequenceData: exampleSequenceData
-                      });
-                    }
-                  }
-                }
+                hook: () => {}
               })}
               {renderToggle({
                 isSelect: true,
@@ -657,21 +606,7 @@ certain dna specific tools and annotations are automatically disabled when isPro
                 ],
                 hidden:
                   this.state.moleculeType !== "DNA" && this.state.moleculeType,
-                hook: (val) => {
-                  if (!val) return;
-                  updateEditor(store, "DemoEditor", {
-                    sequenceDataHistory: {},
-                    sequenceData:
-                      val === "5299"
-                        ? exampleSequenceData
-                        : generateSequenceData({
-                            isProtein: false,
-                            numFeatures: 400,
-                            numParts: 400,
-                            sequenceLength: parseInt(val)
-                          })
-                  });
-                }
+                hook: () => {}
               })}
 
               {renderToggle({

@@ -14,7 +14,7 @@ import uniqid from "shortid";
 import { cloneDeep } from "lodash";
 import classNames from "classnames";
 // import pairwiseAlignment2 from "../src/exampleData/pairwiseAlignment2.json";
-import pairwiseAlignment2 from "../../demo/src/exampleData/pairwiseAlignment2.json";
+// import pairwiseAlignment2 from "../../demo/src/exampleData/pairwiseAlignment2.json";
 import ToolbarItem from "./ToolbarItem";
 import { connectToEditor } from "../withEditorProps";
 import withEditorProps from "../withEditorProps";
@@ -180,7 +180,7 @@ class AlignmentTool extends React.Component {
     } else {
       server = "http://62.234.98.190:8080/";
     }
-    let {
+    const {
       alignedSequences: _alignedSequences,
       pairwiseAlignments,
       alignmentType,
@@ -203,7 +203,7 @@ class AlignmentTool extends React.Component {
       })
     ).json();
 
-    pairwiseAlignments = [...pairwiseAlignment2.pairwiseAlignments];
+    // pairwiseAlignments = [...pairwiseAlignment2.pairwiseAlignments];
     // alignmentsToRefSeq set to alignedSequences for now
     let alignedSequences = _alignedSequences;
     alignedSequences = [
