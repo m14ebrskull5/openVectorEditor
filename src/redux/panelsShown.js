@@ -2,7 +2,6 @@ import { map, flatMap } from "lodash";
 import { createReducer } from "redux-act";
 import createAction from "./utils/createMetaAction";
 import { removeItem } from "../utils/arrayUtils";
-import immer from "immer";
 
 //manages which tab panels are shown in the editor
 
@@ -127,12 +126,79 @@ export default createReducer(
     [panelsShownUpdate]: (state, payload) => {
       return payload.filter((group) => group.length); //filter out any empty groups
     },
-    [flipActiveTabFromLinearOrCircularIfNecessary]: (state, setCircActive) => {
-      const newState = immer(state, (s) => {
-        s.forEach((g) => {
-          flipActiveForGroup(g, setCircActive);
+    [flipActiveTabFromLinearOrCircularIfNecessary]: (state) => {
+      const extraMap = [];
+      const existLinearMap = state.some(
+        (i) => i.id === "sequence" || i.some((item) => item.id === "sequence")
+      );
+      if (!existLinearMap)
+        extraMap.push({
+          id: "sequence",
+          name: "sequence map",
+          canClose: true,
+          active: extraMap.length === 0
         });
-      });
+      const existCircularMap = state.some(
+        (i) => i.id === "circular" || i.some((item) => item.id === "sequence")
+      );
+      if (!existCircularMap)
+        extraMap.push({
+          id: "circular",
+          name: "circular map",
+          canClose: true,
+          active: extraMap.length === 0
+        });
+      const existPropertiesMap = state.some(
+        (i) =>
+          i.id === "properties" || i.some((item) => item.id === "properties")
+      );
+      if (!existPropertiesMap)
+        extraMap.push({
+          id: "properties",
+          name: "properties",
+          canClose: true,
+          active: extraMap.length === 0
+        });
+      const existRailsMap = state.some(
+        (i) => i.id === "rail" || i.some((item) => item.id === "rail")
+      );
+      if (!existRailsMap)
+        extraMap.push({
+          id: "rail",
+          name: "linear map",
+          canClose: true,
+          active: extraMap.length === 0
+        });
+      let newState;
+      if (state.length > 0) {
+        newState = [...state, [...extraMap]];
+      } else {
+        newState = [
+          [
+            {
+              id: "sequence",
+              name: "sequence map",
+              active: true,
+              canClose: true
+            },
+            {
+              id: "rail",
+              name: "linear map",
+              canClose: true
+            },
+            {
+              id: "circular",
+              name: "circular map",
+              canClose: true
+            },
+            {
+              id: "properties",
+              name: "properties",
+              canClose: true
+            }
+          ]
+        ];
+      }
 
       return newState;
     },
@@ -248,17 +314,3 @@ export default createReducer(
     // ]
   ]
 );
-
-function flipActiveForGroup(group, setCircActive) {
-  const activeTab = group.find(({ active }) => active);
-  if (activeTab?.id === (setCircActive ? "rail" : "circular")) {
-    //we're on the wrong tab type so check if the other tab is in
-    const newTabToActivate = group.find(
-      ({ id }) => id === (setCircActive ? "circular" : "rail")
-    );
-    if (newTabToActivate) {
-      newTabToActivate.active = true;
-      activeTab.active = false;
-    }
-  }
-}

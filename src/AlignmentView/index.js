@@ -16,8 +16,7 @@ import {
   Tooltip,
   Icon,
   Spinner,
-  AnchorButton,
-  EditableText
+  AnchorButton
 } from "@blueprintjs/core";
 import {
   InfoHelper,
@@ -1053,7 +1052,6 @@ export class AlignmentView extends React.Component {
       additionalSelectionLayerRightClickedOptions,
       selectionLayerRightClicked,
       additionalTopEl,
-      handleAlignmentRename,
       alignmentVisibilityToolOptions
     } = this.props;
     height = height - 150;
@@ -1475,7 +1473,7 @@ export class AlignmentView extends React.Component {
                   )}
 
                   <div style={{ display: "flex" }}>
-                    <EditableText
+                    {/* <EditableText
                       disabled={!handleAlignmentRename}
                       onChange={(v) => {
                         this.setState({
@@ -1506,8 +1504,8 @@ export class AlignmentView extends React.Component {
                       }}
                       selectAllOnFocus={true}
                       className="veAlignmentName"
-                    ></EditableText>
-                    &nbsp;&nbsp;&nbsp;
+                    ></EditableText> */}
+                    {/* &nbsp;&nbsp;&nbsp; */}
                     <div
                       className="veAlignmentType"
                       style={{

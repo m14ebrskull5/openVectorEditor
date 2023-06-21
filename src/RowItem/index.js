@@ -333,7 +333,7 @@ export default function RowItem(props) {
     },
     alignmentType
   };
-  if (!rowContainerStyle.height) {
+  if (rowContainerStyle && !rowContainerStyle.height) {
     rowContainerStyle.height = "auto";
   }
   return (

@@ -172,20 +172,8 @@ class AlignmentTool extends React.Component {
     //   alignmentId: alignmentId
     // });
 
-    // const j5server = process.env.REMOTE_J5 || "http://j5server.teselagen.com"
-
     window.toastr.success("Alignment submitted.");
-    // const replaceProtocol = (url) => {
-    //   return url.replace("http://", window.location.protocol + "//");
-    // };
-
-    const seqInfoToSend = seqsToAlign.map(({ sequence, name, id }) => {
-      return {
-        sequence,
-        name,
-        id
-      };
-    });
+    const seqInfoToSend = seqsToAlign;
     let server;
     if (import.meta.env.MODE === "development") {
       server = "http://127.0.0.1:8080/";
@@ -195,11 +183,12 @@ class AlignmentTool extends React.Component {
     let {
       alignedSequences: _alignedSequences,
       pairwiseAlignments,
+      alignmentType,
+      alignmentName,
       alignmentsToRefSeq,
       alignmentTracks
     } = await (
       await fetch(server, {
-        referrerPolicy: "unsafe-url",
         mode: "cors",
         method: "post",
         headers: {
@@ -242,27 +231,21 @@ class AlignmentTool extends React.Component {
       window.toastr.error("Error running sequence alignment!");
 
     //set the alignment to loading
-    upsertAlignmentRun({
-      id: alignmentId,
-      // pairwiseAlignments,
-      // pairwiseAlignments: [alignmentTracks]
-      // alignmentTracks:
-      //   alignedSequences &&
-      //   alignedSequences.map((alignmentData) => {
-      //     return {
-      //       sequenceData:
-      //         seqsToAlign[
-      //         alignmentData.name.slice(0, alignmentData.name.indexOf("_"))
-      //         ],
-      //       alignmentData,
-      //       chromatogramData:
-      //         seqsToAlign[
-      //           alignmentData.name.slice(0, alignmentData.name.indexOf("_"))
-      //         ].chromatogramData
-      //     };
-      //   })
-      alignmentTracks
-    });
+    if (isPairwiseAlignment) {
+      upsertAlignmentRun({
+        id: alignmentId,
+        alignmentName,
+        alignmentType,
+        pairwiseAlignments: [alignmentTracks]
+      });
+    } else {
+      upsertAlignmentRun({
+        id: alignmentId,
+        alignmentName,
+        alignmentType,
+        alignmentTracks
+      });
+    }
   };
 
   handleFileUpload = (files, onChange) => {

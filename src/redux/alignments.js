@@ -264,7 +264,6 @@ export default (state = {}, { payload = {}, type }) => {
 function getRangeMatchesBetweenTemplateAndNonTemplate(tempSeq, nonTempSeq) {
   //assume all sequences are the same length (with gap characters "-" in some places)
   //loop through all non template sequences and compare them with the template
-
   const seqLength = nonTempSeq.length;
   const ranges = [];
   // const startIndex = "".match/[-]/ Math.max(0, .indexOf("-"));

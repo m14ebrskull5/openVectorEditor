@@ -23,14 +23,14 @@ function saveSeq(sequencesToAlign, file) {
 function runMuscle(file) {
     const out = './out/' + uuidv4()
     try {
-        if(ostype === 'Windows_NT') {
+        if (ostype === 'Windows_NT') {
             const output = execSync('.\\mus.exe -align ' + file + ' -output ' + out);
             console.log('命令执行结果:', output.toString());
         } else {
             const output = execSync('./mus_linux -align ' + file + ' -output ' + out);
             console.log('命令执行结果:', output.toString());
         }
-        
+
     } catch (err) {
         console.error('执行命令时发生错误:', err);
         return null
@@ -53,15 +53,15 @@ app.post('/', function (req, res) {
     let alignParsedResult = parseAlignment(alignResult.toString())
     // console.log(alignResult.toString())
     res.send({
-        "id": "msaAlignment_1",
-        "alignmentType": "Multiple Sequence Alignment 11111",
-        alignmentTracks: alignParsedResult.map((i,index) => {
+        alignmentType: "Multiple Sequence Alignment",
+        alignmentTracks: alignParsedResult.map((i) => {
             const name = i[0]
             const sequence = i.slice(1, i.length).join("")
             let findItemIndex = req.body.sequencesToAlign.findIndex(item => item.name == name)
             let findItem = req.body.sequencesToAlign[findItemIndex]
             return {
                 sequenceData: {
+                    ...findItem,
                     "name": findItem.name,
                     "sequence": findItem.sequence
                 },

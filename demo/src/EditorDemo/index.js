@@ -2144,9 +2144,6 @@ clickOverrides: {
             })}
             {...(this.state.onImport && {
               onImport: (sequence) => {
-                window.toastr.success(
-                  `onImport callback triggered for sequence: ${sequence.name}`
-                );
                 return sequence;
               }
             })}
