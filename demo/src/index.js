@@ -1,3 +1,5 @@
+// eslint-disable-next-line
+import Symbol_observable from "symbol-observable";
 import React, { useMemo } from "react";
 import { Provider } from "react-redux";
 import { HashRouter as Router, Route, Redirect } from "react-router-dom";

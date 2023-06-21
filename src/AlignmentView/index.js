@@ -2023,7 +2023,7 @@ export default compose(
   branch(
     ({ loading }) => loading,
     renderComponent(() => {
-      return <Loading bounce />;
+      return <Loading bounce style={{ margin: "0 20px" }} />;
     })
   ),
   branch(
