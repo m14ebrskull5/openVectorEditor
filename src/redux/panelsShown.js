@@ -139,7 +139,7 @@ export default createReducer(
           active: extraMap.length === 0
         });
       const existCircularMap = state.some(
-        (i) => i.id === "circular" || i.some((item) => item.id === "sequence")
+        (i) => i.id === "circular" || i.some((item) => item.id === "circular")
       );
       if (!existCircularMap)
         extraMap.push({
@@ -170,8 +170,12 @@ export default createReducer(
           active: extraMap.length === 0
         });
       let newState;
-      if (state.length > 0) {
-        newState = [...state, [...extraMap]];
+      const existGroup = state.slice(0, state.length - 1);
+      const finalGroup = state[state.length - 1];
+      if (state.length === 1) {
+        newState = [[...finalGroup, ...extraMap]];
+      } else if (state.length > 1) {
+        newState = [...existGroup, [...finalGroup, ...extraMap]];
       } else {
         newState = [
           [
