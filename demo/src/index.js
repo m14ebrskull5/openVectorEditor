@@ -3,11 +3,11 @@ import Symbol_observable from "symbol-observable";
 import React from "react";
 import { Provider } from "react-redux";
 import { HashRouter as Router, Route, Redirect } from "react-router-dom";
-
 import store from "./store";
 import { render } from "react-dom";
 
 import "./style.css";
+console.warn = () => {};
 import("./EditorDemo").then(({ default: EditorDemo }) => {
   const Demo = () => {
     return (
