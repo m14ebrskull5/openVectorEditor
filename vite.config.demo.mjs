@@ -27,6 +27,7 @@ export default defineConfig({
   base: "http://test-1255379270.file.myqcloud.com/aaa/dist/",
 
   build: {
+    chunkSizeWarningLimit: 2000,
     target: "es2015",
     lib: undefined, //remove the lib build so we just get the demo build
     outDir: "demo/dist",
@@ -38,7 +39,10 @@ export default defineConfig({
         manualChunks: {
           teselagen: ['@teselagen/bio-parsers', '@teselagen/file-utils', '@teselagen/range-utils', '@teselagen/react-list', '@teselagen/react-table', '@teselagen/sequence-utils'],
           dayjs: ['dayjs'],
-          vendor: ['react', 'react-dom', 'redux', 'lodash', '@blueprintjs/colors', '@blueprintjs/core', '@blueprintjs/datetime', '@blueprintjs/icons']
+          vendor: ['react', 'react-dom', 'redux', 'axios', 'lodash', 'lodash-es', '@blueprintjs/colors', '@blueprintjs/core', '@blueprintjs/datetime', '@blueprintjs/icons'],
+          teselagenreactcomponents: [
+            'teselagen-react-components'
+          ]
         }
       }
     },

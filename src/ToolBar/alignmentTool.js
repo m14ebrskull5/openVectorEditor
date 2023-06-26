@@ -32,9 +32,7 @@ export default connectToEditor(({ readOnly, toolBar = {} }) => {
     <ToolbarItem
       {...{
         Icon: <Icon data-test="alignmentTool" icon="align-left" />,
-        // toggled: alignmentTool.isOpen,
-        renderIconAbove: isOpen,
-        // onIconClick: toggleFindTool,
+
         Dropdown: ConnectedAlignmentToolDropdown,
         onIconClick: "toggleDropdown",
         noDropdownIcon: true,
