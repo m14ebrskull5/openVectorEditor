@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable no-throw-literal */
 import { unparse } from "papaparse";
 import CreateAnnotationsPage from "./CreateAnnotationsPage";
@@ -101,7 +99,6 @@ export const AutoAnnotateModal = compose(
         }
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (newAnnotations) {
     return (
@@ -342,9 +339,7 @@ FRT	GAAGTTCCTATTCTCTAGAAAGTATAGGAACTTC	misc_recomb	orchid	pink	0	0`,
             };
             if (fileType === "implementerDefined") {
               for (const [
-                // eslint-disable-next-line no-unused-vars
                 i,
-                // eslint-disable-next-line no-unused-vars
                 { name, sequence, matchType, type, isRegex }
               ] of customAnnResponse.list.entries()) {
                 await validateRow(
@@ -375,7 +370,6 @@ FRT	GAAGTTCCTATTCTCTAGAAAGTATAGGAACTTC	misc_recomb	orchid	pink	0	0`,
                 };
               }
 
-              // eslint-disable-next-line no-unused-vars
               for (const [index, row] of data.entries()) {
                 const error = validateCSVRow(row, csvHeaders, index);
                 if (error) {
@@ -389,7 +383,6 @@ FRT	GAAGTTCCTATTCTCTAGAAAGTATAGGAACTTC	misc_recomb	orchid	pink	0	0`,
               const { data } = await parseCsvFile(apeFile[0], {
                 header: false
               });
-              // eslint-disable-next-line no-unused-vars
               for (const [i, [name, sequence, type]] of data.entries()) {
                 await validateRow(
                   { name, sequence, type },

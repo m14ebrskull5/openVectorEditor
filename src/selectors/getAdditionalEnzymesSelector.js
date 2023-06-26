@@ -23,7 +23,6 @@ export default createSelector(
             return false;
           }
 
-          // eslint-disable-next-line no-unused-vars
           for (const prop of [
             "forwardRegex",
             "reverseRegex",

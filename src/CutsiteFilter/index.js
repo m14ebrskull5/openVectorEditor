@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Button, Icon, Tag, Tooltip } from "@blueprintjs/core";
@@ -379,7 +378,6 @@ export function CutsiteFilter(props) {
           }}
           value={value}
         />
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         {!manageEnzymesToLeft && (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {manageEnzymesLink}

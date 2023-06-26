@@ -538,7 +538,6 @@ function VectorInteractionHOC(Component /* options */) {
       }
     };
 
-    // eslint-disable-next-line no-unused-vars
     getCopyOptions = (annotation) => {
       const { sequenceData, readOnly, selectionLayer } = this.props;
       const { isProtein } = sequenceData;

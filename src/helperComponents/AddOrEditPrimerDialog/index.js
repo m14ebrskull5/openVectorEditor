@@ -65,7 +65,6 @@ const CustomContentEditable = generateField(function CustomContentEditable({
 
   useEffect(() => {
     CaretPositioning.restoreSelection(inputRef.current, caretPosition);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bases]);
 
   const basesToUse = bases || "";

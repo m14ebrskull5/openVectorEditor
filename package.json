@@ -27,7 +27,8 @@
     "c": "yarn cypress open --e2e --browser chrome",
     "test-e2e": "yarn cypress run --record --key 373658d4-4931-4ffd-9263-8eb78a838ab9",
     "changelog": "auto-changelog -p && git add CHANGELOG.md",
-    "prepare": "husky install"
+    "local": "vite build -c vite.config.local.mjs",
+    "webpack": "webpack --progress"
   },
   "dependencies": {
     "@blueprintjs/core": "3.52.0",
@@ -90,27 +91,51 @@
     "cypress": "12.9.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/plugin-syntax-jsx": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
     "@cypress/code-coverage": "^3.10.0",
+    "@svgr/webpack": "^8.0.1",
     "@vitejs/plugin-react": "^4.0.0",
     "auto-changelog": "^2.4.0",
+    "babel-loader": "^9.1.2",
     "babel-plugin-istanbul": "^6.1.1",
+    "babel-preset-react-app": "^10.0.1",
+    "bfj": "^7.0.2",
     "copy-to-clipboard": "^3.3.3",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
     "eslint": "^8.35.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-config-teselagen": "6.0.17",
     "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-webpack-plugin": "^4.0.1",
+    "file-loader": "^6.2.0",
     "gh-pages": "^4.0.0",
+    "html-webpack-plugin": "^5.5.3",
     "husky": "^8.0.3",
     "lint-staged": "10.5.4",
+    "mini-css-extract-plugin": "^2.7.6",
     "nodemon": "^2.0.21",
     "nwb": "0.25.2",
     "papaparse": "^5.4.0",
+    "path-browserify": "^1.0.1",
     "prettier": "2.8.4",
     "react": "^17.0.2",
     "react-addons-perf": "^15.4.2",
+    "react-dev-utils": "^12.0.1",
     "react-dom": "^17.0.2",
     "react-markdown": "8.0.7",
+    "resolve-url-loader": "^5.0.0",
+    "source-map-loader": "^4.0.1",
     "to-regex-range": "^5.0.1",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "webpack": "^5.88.0",
+    "webpack-bundle-analyzer": "^4.9.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-manifest-plugin": "^5.0.0",
+    "workbox-webpack-plugin": "^7.0.0"
   },
   "resolutions": {
     "listr": "0.14.3"
@@ -140,5 +165,17 @@
     "pairwise",
     "pairwise-alignment",
     "teselagen"
-  ]
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

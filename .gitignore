@@ -21,4 +21,5 @@ yarn-error.log
 /out
 /seq
 /pwa
+/build
 

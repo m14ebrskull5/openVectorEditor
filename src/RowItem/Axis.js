@@ -23,7 +23,6 @@ const Axis = function (props) {
     isLinearView
   } = props;
   const noRows = row.start === 0 && row.end === 0;
-  /* eslint-disable react-hooks/exhaustive-deps */
   //memoize this function because it does the heavy lifting
   const tickMarkPositions = useMemo(() => {
     if (noRows) return [];
@@ -51,7 +50,6 @@ const Axis = function (props) {
     isProtein,
     charWidth
   ]);
-  /* eslint-enable react-hooks/exhaustive-deps*/
   if (noRows) {
     return null;
   }

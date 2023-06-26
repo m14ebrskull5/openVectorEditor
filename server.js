@@ -1,5 +1,4 @@
 /* eslint-disable eqeqeq */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 const express = require('express')
 const { execSync } = require('child_process');

@@ -357,7 +357,6 @@ class _LinearView extends React.Component {
 }
 
 const WithAnnotationLimitsHoc = (Component) => (props) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [limits = {}] = useAnnotationLimits();
   return <Component limits={limits} {...props}></Component>;
 };

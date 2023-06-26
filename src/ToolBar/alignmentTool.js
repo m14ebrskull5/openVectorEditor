@@ -13,8 +13,6 @@ import { flatMap } from "lodash";
 import uniqid from "shortid";
 import { cloneDeep } from "lodash";
 import classNames from "classnames";
-// import pairwiseAlignment2 from "../src/exampleData/pairwiseAlignment2.json";
-import pairwiseAlignment2 from "../../demo/src/exampleData/pairwiseAlignment2.json";
 import ToolbarItem from "./ToolbarItem";
 import { connectToEditor } from "../withEditorProps";
 import withEditorProps from "../withEditorProps";
@@ -132,7 +130,6 @@ class AlignmentTool extends React.Component {
               i
             ].sequence.slice(suggestedTrimStart, suggestedTrimEnd + 1);
             const elementsToTrim = ["baseCalls", "basePos", "qualNums"];
-            // eslint-disable-next-line no-unused-vars
             for (const element in addedSequencesToUseTrimmed[i]
               .chromatogramData) {
               if (elementsToTrim.indexOf(element) !== -1) {
@@ -203,8 +200,6 @@ class AlignmentTool extends React.Component {
       })
     ).json();
 
-    pairwiseAlignments = [...pairwiseAlignment2.pairwiseAlignments];
-    // alignmentsToRefSeq set to alignedSequences for now
     let alignedSequences = _alignedSequences;
     alignedSequences = [
       {

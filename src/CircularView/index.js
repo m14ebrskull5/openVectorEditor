@@ -151,7 +151,6 @@ export function CircularView(props) {
           (normalizeAngle(Math.PI * 2 - rotationRadians) / Math.PI) * 180
         );
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let zoomLevel = _zoomLevel;
 
