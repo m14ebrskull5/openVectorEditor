@@ -20,4 +20,5 @@ yarn-error.log
 .npmrc
 /out
 /seq
+/pwa
 
