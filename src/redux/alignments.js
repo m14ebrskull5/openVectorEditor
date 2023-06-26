@@ -310,9 +310,7 @@ function checkForIssues(alignmentTracks, alignmentType) {
   }
   const alignmentTrackLength = alignmentTracks[0].alignmentData.sequence.length;
   let hasError;
-  console.log(alignmentTracks);
   alignmentTracks.some((track) => {
-    console.log(track.alignmentData.sequence.length);
     if (
       track.alignmentData.sequence &&
       track.alignmentData.sequence.length !== alignmentTrackLength

@@ -70,7 +70,7 @@ const defaultState = {
   clickOverridesExample: false,
   showAvailability: true,
   showCicularViewInternalLabels: true,
-  showDemoOptions: false,
+  showDemoOptions: true,
   shouldAutosave: false,
   generatePng: false,
   allowPanelTabDraggable: true,

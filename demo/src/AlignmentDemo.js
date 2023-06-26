@@ -15,7 +15,7 @@ import { Button } from "@blueprintjs/core";
 msaAlignment.alignmentTracks = msaAlignment.alignmentTracks.slice(0, 20);
 const defaultState = {
   alignmentDataId: msaAlignment.id,
-  showDemoOptions: false,
+  showDemoOptions: true,
   forceHeightMode: false,
   isFullyZoomedOut: false,
   setMinimapLaneHeight: false,
