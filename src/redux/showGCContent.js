@@ -19,5 +19,5 @@ export default createReducer(
       return val;
     }
   },
-  window.localStorage.getItem("showGCContent")
+  JSON.parse(window.localStorage.getItem("showGCContent"))
 );
