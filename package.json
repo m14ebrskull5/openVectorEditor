@@ -27,7 +27,7 @@
     "c": "yarn cypress open --e2e --browser chrome",
     "test-e2e": "yarn cypress run --record --key 373658d4-4931-4ffd-9263-8eb78a838ab9",
     "changelog": "auto-changelog -p && git add CHANGELOG.md",
-    "prepare": "husky install"
+    "local": "vite build -c vite.config.local.js"
   },
   "dependencies": {
     "@blueprintjs/core": "3.52.0",

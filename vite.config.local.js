@@ -24,7 +24,6 @@ export default defineConfig({
   define: {
     'process.platform': {}
   },
-  base: "http://test-1255379270.cos.ap-beijing.myqcloud.com/aaa/dist/",
 
   build: {
     target: "es2015",
