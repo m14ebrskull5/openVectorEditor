@@ -170,7 +170,7 @@ class AlignmentTool extends React.Component {
     //   alignmentId: alignmentId
     // });
 
-    window.toastr.success("Alignment submitted.");
+    // window.toastr.success("Alignment submitted.");
     const seqInfoToSend = seqsToAlign;
     let server;
     if (import.meta.env.MODE === "development") {

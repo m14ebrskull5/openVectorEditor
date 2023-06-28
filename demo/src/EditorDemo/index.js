@@ -3,6 +3,7 @@ import {
   generateSequenceData,
   tidyUpSequenceData
 } from "@teselagen/sequence-utils";
+import serverAddress from "./serveraddress";
 import React from "react";
 import { isRangeOrPositionWithinRange } from "@teselagen/range-utils";
 // import isMobile from "is-mobile";
@@ -141,7 +142,7 @@ export default class EditorDemo extends React.Component {
           additionalFooterEls: (
             <Button
               onClick={() => {
-                window.toastr.success("properties overrides successfull");
+                // window.toastr.success("properties overrides successfull");
               }}
             >
               propertiesProps parts footer button
@@ -162,8 +163,8 @@ export default class EditorDemo extends React.Component {
         return [
           ...items,
           {
-            text: `My Part Override - ${annotation.name} - ${sequenceData.sequence.length}`,
-            onClick: () => window.toastr.success("Part Override Hit!")
+            text: `My Part Override - ${annotation.name} - ${sequenceData.sequence.length}`
+            // onClick: () => window.toastr.success("Part Override Hit!")
           }
         ];
       }
@@ -223,8 +224,8 @@ export default class EditorDemo extends React.Component {
             onClick: () => window.toastr.success("Custom export hit!")
           });
         menuDef[3].submenu.push({
-          text: "My Custom Tool",
-          onClick: () => window.toastr.success("Some custom tool")
+          text: "My Custom Tool"
+          // onClick: () => window.toastr.success("Some custom tool")
         });
         return menuDef;
       }
@@ -238,14 +239,14 @@ export default class EditorDemo extends React.Component {
           name: "downloadTool",
           Icon: <Icon data-test="veDownloadTool" icon="bank-account" />,
           onIconClick: () => {
-            window.toastr.success("Download tool hit!");
+            // window.toastr.success("Download tool hit!");
           }
         },
         {
           name: "undoTool",
           Icon: <Icon icon="credit-card" data-test="my-overridden-tool-123" />,
           onIconClick: () => {
-            window.toastr.success("cha-ching");
+            // window.toastr.success("cha-ching");
           },
           disabled: false
         },
@@ -1943,9 +1944,9 @@ clickOverrides: {
             })}
             editorName="DemoEditor"
             onPreviewModeFullscreenClose={() => {
-              window.toastr.success(
-                "onPreviewModeFullscreenClose hit -- Fullscreen Closed"
-              );
+              // window.toastr.success(
+              //   "onPreviewModeFullscreenClose hit -- Fullscreen Closed"
+              // );
             }}
             maxAnnotationsToDisplay={
               this.state.maxAnnotationsToDisplayAdjustment
@@ -2176,9 +2177,19 @@ clickOverrides: {
               ) {
                 console.info("opts:", opts);
                 if (window.Cypress) window.Cypress.pngFile = opts.pngFile;
-                console.info("sequenceData:", sequenceDataToSave);
+                // console.info("sequenceData:", sequenceDataToSave);
+                // console.log(serverAddress)
+                fetch(serverAddress + "/api/seq", {
+                  method: "POST",
+                  body: JSON.stringify(sequenceDataToSave),
+                  headers: {
+                    "Content-Type": "application/json"
+                  }
+                }).then(() => {
+                  // console.log(data)
+                });
                 console.info("editorState:", editorState);
-                window.toastr.success("onSave callback triggered");
+                // window.toastr.success("onSave callback triggered");
                 // To disable the save button after successful saving
                 // either call the onSuccessCallback or return a successful promise :)
                 onSuccessCallback();

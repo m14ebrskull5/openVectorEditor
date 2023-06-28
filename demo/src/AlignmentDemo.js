@@ -214,14 +214,14 @@ export default class AlignmentDemo extends React.Component {
                 additionalSelectionLayerRightClickedOptions: () => [
                   {
                     text: "I'm an additional option",
-                    className: "createDiversityRegion",
-                    onClick: () => window.toastr.success("You did it!")
+                    className: "createDiversityRegion"
+                    // onClick: () => window.toastr.success("You did it!")
                   }
                 ]
               }),
               ...(this.state.overrideSelectionRightClick && {
                 selectionLayerRightClicked: () => {
-                  window.toastr.success("lezzz goooo!");
+                  // window.toastr.success("lezzz goooo!");
                 }
               }),
               additionalTopEl: <Button>Additional Top El</Button>,
@@ -236,9 +236,9 @@ export default class AlignmentDemo extends React.Component {
                 : undefined,
               handleAlignmentRename: this.state.handleAlignmentRename
                 ? (newName) => {
-                    window.toastr.success(
-                      `handleAlignmentRename triggered with ${newName}`
-                    );
+                    // window.toastr.success(
+                    //   `handleAlignmentRename triggered with ${newName}`
+                    // );
                     this.setState({ alignmentName: newName });
                   }
                 : undefined,

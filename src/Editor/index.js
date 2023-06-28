@@ -524,7 +524,7 @@ export class Editor extends React.Component {
       this.props,
       userDefinedHandlersAndOpts
     );
-    const panels = flatMap(panelsToShow, (panelGroup, index) => {
+    let panels = flatMap(panelsToShow, (panelGroup, index) => {
       // let activePanelId
       let activePanelId;
       let activePanelType;
@@ -837,7 +837,6 @@ export class Editor extends React.Component {
           propagate
         />
       );
-
       panels.push(
         <ReflexElement
           key="extraRightSidePanel"
@@ -849,6 +848,32 @@ export class Editor extends React.Component {
         </ReflexElement>
       );
     }
+    const leftpanels = [
+      <ReflexElement
+        key="navigatorElement"
+        name="nav"
+        flex="0.2"
+        style={{
+          boxShadow: "2px 0 8px 0 #c9d8db, inset -1px 0 0 0 #e8f0f2"
+        }}
+      >
+        <h1 key="ass">222222</h1>
+      </ReflexElement>,
+      <ReflexSplitter
+        key="extraRightSidePanelassSplitter"
+        style={{
+          zIndex: 1
+        }}
+        propagate
+      />
+    ];
+    if (panels.length > 0) {
+      leftpanels.push(...panels);
+    } else {
+      leftpanels.push(<ReflexElement key="empty"></ReflexElement>);
+    }
+    panels = leftpanels;
+    // console.log(leftpanels)
     return (
       <React.Fragment>
         <DropHandler
