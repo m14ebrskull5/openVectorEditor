@@ -134,16 +134,16 @@ export default [
         ]
       }
     ]
-  },
-  // { isMenuSearch: true }
-  {
-    text: "Help",
-    submenu: [
-      { isMenuSearch: true },
-      "--",
-      "about",
-      { cmd: "versionNumber", shouldDismissPopover: false },
-      "hotkeyDialog"
-    ]
   }
+  // { isMenuSearch: true }
+  // {
+  //   text: "Help",
+  //   submenu: [
+  //     { isMenuSearch: true },
+  //     "--",
+  //     "about",
+  //     { cmd: "versionNumber", shouldDismissPopover: false },
+  //     "hotkeyDialog"
+  //   ]
+  // }
 ];

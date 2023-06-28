@@ -180,19 +180,23 @@ export default createReducer(
         newState = [
           [
             {
-              id: "sequence",
-              name: "sequence map",
+              id: "circular",
+              name: "circular map",
               active: true,
               canClose: true
             },
+
             {
               id: "rail",
               name: "linear map",
               canClose: true
-            },
+            }
+          ],
+          [
             {
-              id: "circular",
-              name: "circular map",
+              id: "sequence",
+              name: "sequence map",
+              active: true,
               canClose: true
             },
             {
