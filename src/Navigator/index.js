@@ -22,7 +22,7 @@ const Navigator = (props) => {
           }
         );
     });
-  });
+  }, []);
   const {
     updateSequenceData,
     flipActiveTabFromLinearOrCircularIfNecessary,

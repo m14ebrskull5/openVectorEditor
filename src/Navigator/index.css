@@ -50685,7 +50685,7 @@ label.columnFilterDropdown-item {
   width: 100px;
 }
 .sidepanelItem {
-  border-top: 1px solid #e8f0f2;
+  /* border-top: 1px solid #e8f0f2; */
   cursor: pointer;
   padding: 8px 12px;
   margin-left: -12px;
@@ -50788,7 +50788,6 @@ label.columnFilterDropdown-item {
   -moz-background-clip: padding;
   -webkit-background-clip: padding;
   background-clip: padding-box;
-  border-top: 2px solid transparent;
 }
 .sidepanelItemDNDWrapper:last-child .sidepanelItem,
 .sidepanelItem--noIcon:last-child.sidepanelItem {
