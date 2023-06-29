@@ -52,7 +52,7 @@ class OveMenuBar extends React.Component {
     return (
       <div
         className="veMenuBarContainer"
-        style={{ display: "flex", width: "100%" /* height: "100%" */ }}
+        style={{ display: "flex", width: "100%" }}
       >
         <MenuBar
           extraContent={

@@ -29,9 +29,6 @@ import pluralize from "pluralize";
 import { useEffect, useState } from "react";
 import _chromData from "../../../scratch/ab1ParsedGFPvv50.json";
 import { convertBasePosTraceToPerBpTrace } from "@teselagen/bio-parsers";
-// import AddOrEditPrimerDialog from "../../../src/helperComponents/AddOrEditPrimerDialog";
-// import _chromData from "../../../scratch/B_reverse.json";
-// import example1Ab1 from "../../../scratch/example1.ab1.json";
 const chromData = convertBasePosTraceToPerBpTrace(_chromData);
 
 const MyCustomTab = connectToEditor(({ sequenceData = {} }) => {
@@ -2133,7 +2130,7 @@ clickOverrides: {
               }
             })}
             {...(this.state.onNew && {
-              onNew: () => window.toastr.success("onNew callback triggered")
+              onNew: () => {}
             })}
             {...(this.state.defaultLinkedOligoMessage && {
               defaultLinkedOligoMessage: "Custom Linked Oligo Message Here"
@@ -2175,10 +2172,11 @@ clickOverrides: {
                 editorState,
                 onSuccessCallback
               ) {
-                console.info("opts:", opts);
+                console.info("sequenceDataToSave:", sequenceDataToSave);
                 if (window.Cypress) window.Cypress.pngFile = opts.pngFile;
                 // console.info("sequenceData:", sequenceDataToSave);
                 // console.log(serverAddress)
+                sequenceDataToSave.id = window.addOnGlobals.shortid();
                 fetch(serverAddress + "/api/seq", {
                   method: "POST",
                   body: JSON.stringify(sequenceDataToSave),
@@ -2455,6 +2453,7 @@ clickOverrides: {
             {...(this.state.menuOverrideExample && this.menuOverrideExample)}
             {...(this.state.extraAnnotationPropsExample &&
               this.extraAnnotationPropsExample)}
+            serverAddress={serverAddress}
           />
           {/* </div> */}
         </div>

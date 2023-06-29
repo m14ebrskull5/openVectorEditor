@@ -34,11 +34,13 @@ import * as featureLengthsToHide from "./featureLengthsToHide";
 import * as primerLengthsToHide from "./primerLengthsToHide";
 import * as partLengthsToHide from "./partLengthsToHide";
 import * as selectedPartTags from "./selectedPartTags";
+import * as navigator from "./navigator";
 import { combineReducers } from "redux";
 import createAction from "./utils/createMetaAction";
 export { default as vectorEditorMiddleware } from "./middleware";
 
 const subReducers = {
+  navigator,
   createYourOwnEnzyme,
   annotationLabelVisibility,
   annotationsToSupport,

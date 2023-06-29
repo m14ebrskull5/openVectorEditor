@@ -946,7 +946,8 @@ export class AlignmentView extends React.Component {
             },
             width: linearViewWidth,
             paddingBottom: 5,
-            scrollDataPassed: this.easyStore
+            scrollDataPassed: this.easyStore,
+            withZoomLinearView: false
           }}
         />
       </div>
@@ -1054,7 +1055,7 @@ export class AlignmentView extends React.Component {
       additionalTopEl,
       alignmentVisibilityToolOptions
     } = this.props;
-    height = height - 150;
+    height = height - 200; //修改底部
     const sequenceLength = this.getMaxLength();
     if (
       !alignmentTracks ||

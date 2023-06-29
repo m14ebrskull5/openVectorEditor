@@ -801,6 +801,7 @@ function doAnySpanOrigin(annotations) {
 export const connectToEditor = (fn) => {
   return connect(
     (state, ownProps, ...rest) => {
+      // console.log(state, ownProps, rest, fn)
       const editor = state.VectorEditor[ownProps.editorName] || {};
       editor.sequenceData = editor.sequenceData || {};
       editor.sequenceData.sequence = getUpperOrLowerSeq(

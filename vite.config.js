@@ -24,6 +24,7 @@ export default defineConfig({
   define: {
     'process.platform': {}
   },
+  publicDir: "demo/public",
   build: {
     target: "es2015",
     lib: {

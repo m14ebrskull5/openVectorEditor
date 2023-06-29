@@ -1,9 +1,11 @@
-package com.example.ove.model; /**
- * Copyright 2023 json.cn
- */
+package com.example.ove.model;
+
+/**
+* Copyright 2023 json.cn
+*/
+
 import java.util.HashMap;
 import java.util.List;
-import java.util.Date;
 
 /**
  * Auto-generated: 2023-06-28 16:56:27
@@ -12,13 +14,23 @@ import java.util.Date;
  * @website http://www.json.cn/java2pojo/
  */
 public class SeqBody {
-    private HashMap<Long,Parts> parts;
-    private HashMap<String,Parts> primers;
+    private HashMap<Long, Parts> parts;
+    private HashMap<String, Parts> primers;
     private List<Afeatures> afeatures;
-    private HashMap<String,Features> features;
+    private HashMap<String, Features> features;
     private String name;
     private String sequence;
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     private String date;
+    private Long timestamp;
     private boolean circular;
     private List<String> comments;
     private String teselagen_unique_id;
@@ -31,13 +43,12 @@ public class SeqBody {
     private Warnings warnings;
     private AssemblyPieces assemblyPieces;
     private LineageAnnotations lineageAnnotations;
-    private HashMap<String,Cutsites> cutsites;
-    private HashMap<String,Orfs> orfs;
-    private HashMap<String,Translations> translations;
+    private HashMap<String, Cutsites> cutsites;
+    private HashMap<String, Orfs> orfs;
+    private HashMap<String, Translations> translations;
     private Guides guides;
     private boolean materiallyAvailable;
     private String description;
-
 
     public HashMap<Long, Parts> getParts() {
         return parts;

@@ -10,7 +10,7 @@ import {
   ContextMenu
 } from "@blueprintjs/core";
 import PropTypes from "prop-types";
-
+import Navigator from "../Navigator";
 import VersionHistoryView from "../VersionHistoryView";
 import { importSequenceFromFile } from "../withEditorProps";
 import getAdditionalEnzymesSelector from "../selectors/getAdditionalEnzymesSelector";
@@ -354,7 +354,7 @@ export class Editor extends React.Component {
       annotationsToSupport,
       withRotateCircularView = true,
       withZoomCircularView = true,
-      withZoomLinearView = false,
+      withZoomLinearView = true,
       displayMenuBarAboveTools = true,
       updateSequenceData,
       readOnly,
@@ -381,7 +381,9 @@ export class Editor extends React.Component {
       onlyShowLabelsThatDoNotFit = true,
       previewModeFullscreen: controlledPreviewModeFullscreen,
       previewModeButtonMenu,
-      allowPanelTabDraggable = true
+      allowPanelTabDraggable = true,
+      serverAddress,
+      onImport
     } = this.props;
     if (
       !this.props.noVersionHistory &&
@@ -848,6 +850,8 @@ export class Editor extends React.Component {
         </ReflexElement>
       );
     }
+
+    //左侧
     const leftpanels = [
       <ReflexElement
         key="navigatorElement"
@@ -857,12 +861,13 @@ export class Editor extends React.Component {
           boxShadow: "2px 0 8px 0 #c9d8db, inset -1px 0 0 0 #e8f0f2"
         }}
       >
-        <h1 key="ass">222222</h1>
+        <Navigator serverAddress={serverAddress} onImport={onImport} />
       </ReflexElement>,
       <ReflexSplitter
         key="extraRightSidePanelassSplitter"
         style={{
-          zIndex: 1
+          zIndex: 1,
+          marginTop: 0
         }}
         propagate
       />

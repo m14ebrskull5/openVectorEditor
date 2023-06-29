@@ -138,7 +138,10 @@ export function ToolBar(props) {
   }
 
   return (
-    <div className="veToolbar-outer" style={{ display: "flex" }}>
+    <div
+      className="veToolbar-outer"
+      style={{ display: "flex", padding: "0px" }}
+    >
       {contentLeft}
       <div
         style={{
@@ -172,8 +175,9 @@ export function ToolBar(props) {
             className="veTools-displayMenuBarAboveTools"
             style={{
               display: "flex",
-              paddingLeft: 15,
-              paddingRight: 15,
+              paddingLeft: 20,
+              paddingRight: 25,
+              paddingBottom: 15,
               flexWrap: "wrap",
               ...(isMobile() && {
                 overflow: "auto",
