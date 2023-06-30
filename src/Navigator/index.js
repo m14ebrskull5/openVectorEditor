@@ -38,6 +38,7 @@ const Navigator = (props) => {
               }
             });
             // eslint-disable-next-line react-hooks/exhaustive-deps
+            // 不知道如何才能消除这两个dispatch的eslint警告 ，非常头疼，只能全文件屏蔽eslint
             updateSequenceData({ ...data.data, fromServer: true });
 
             flipActiveTabFromLinearOrCircularIfNecessary();
