@@ -158,7 +158,7 @@ class SequenceInputNoHotkeys extends React.Component {
               }, 200);
             }
             if (maxInsertSize && sanitizedVal.lenth > maxInsertSize) {
-              return window.toastr.error(
+              return console.error(
                 "Sorry, your insert is greater than ",
                 maxInsertSize
               );
@@ -218,7 +218,7 @@ export default function createSequenceInputPopup(props) {
     caretEl = document.querySelector(".veCaret");
   }
   if (document.body.classList.contains("sequenceDragging")) {
-    window.toastr.warning("Can't insert new sequence while dragging");
+    console.warn("Can't insert new sequence while dragging");
     //don't allow this
     return;
   }

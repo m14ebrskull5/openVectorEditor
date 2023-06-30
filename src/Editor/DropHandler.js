@@ -6,7 +6,7 @@ import "./DropHandler.css";
 export default class DropHandler extends React.Component {
   handleDrop = (files) => {
     if (!files || !files.length) {
-      return window.toastr.warning("Unrecognized File Type");
+      return console.warn("Unrecognized File Type");
     }
     this.props.importSequenceFromFile(files[0]);
   };
@@ -31,7 +31,7 @@ export default class DropHandler extends React.Component {
           ".json"
         ]}
         onDropRejected={() => {
-          window.toastr.error("Error: Incorrect File Type");
+          console.error("Error: Incorrect File Type");
         }}
         onDrop={this.handleDrop}
       >

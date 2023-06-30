@@ -16,7 +16,8 @@ public class SeqService {
 
     private final SeqRepo repo;
     public List<Seq> getList() {
-        return repo.findSeqBodiesBy().stream().map(i -> new Seq(i.getName(), i.getId())).toList();
+        return repo.findSeqBodiesBy()
+                .stream().map(i -> new Seq(i.getName(), i.getId(), i.getTimestamp(), i.getStateTrackingId())).toList();
     };
 
     public void save(SeqBody body) {

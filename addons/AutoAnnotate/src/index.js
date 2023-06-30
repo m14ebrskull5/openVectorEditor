@@ -94,7 +94,7 @@ export const AutoAnnotateModal = compose(
           const anns = await getCustomAutoAnnotateList(props);
           setCustomAnnResponse(anns);
         } catch (e) {
-          // window.toastr.warning("Error loading custom annotation list");
+          // console.warn("Error loading custom annotation list");
           console.error(`e:`, e);
         } finally {
           setLoadingCustomAnnList(false);
@@ -402,7 +402,7 @@ FRT	GAAGTTCCTATTCTCTAGAAAGTATAGGAACTTC	misc_recomb	orchid	pink	0	0`,
             }
 
             if (!annsToCheck.length) {
-              return window.toastr.warning(
+              return console.warn(
                 "No Annotations Detected on File. Please check that your file is in the correct format."
               );
             }
@@ -444,7 +444,7 @@ FRT	GAAGTTCCTATTCTCTAGAAAGTATAGGAACTTC	misc_recomb	orchid	pink	0	0`,
                 })
               );
             } else {
-              // window.toastr.warning(
+              // console.warn(
               //   `No ${annotationType}s detected on sequence.`
               // );
             }
@@ -453,7 +453,7 @@ FRT	GAAGTTCCTATTCTCTAGAAAGTATAGGAACTTC	misc_recomb	orchid	pink	0	0`,
             if (error.validationError) {
               throw new SubmissionError({ [fileType]: error.validationError });
             } else {
-              // window.toastr.error(
+              // console.error(
               //   `Error annotating ${annotationType}(s). Double check your file to make sure it is valid!`
               // );
             }

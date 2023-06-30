@@ -192,9 +192,9 @@ export class AlignmentView extends React.Component {
       input.select();
       const copySuccess = document.execCommand("copy");
       if (!copySuccess) {
-        window.toastr.error("Selection Not Copied");
+        console.error("Selection Not Copied");
       } else {
-        window.toastr.success("Selection Copied");
+        console.info("Selection Copied");
       }
       document.body.removeChild(input);
       event.preventDefault();
@@ -1228,7 +1228,7 @@ export class AlignmentView extends React.Component {
                                       );
                                   },
                                   onClick: () => {
-                                    window.toastr.success("Selection Copied");
+                                    console.info("Selection Copied");
                                   }
                                 },
                                 {
@@ -1265,9 +1265,7 @@ export class AlignmentView extends React.Component {
                                       );
                                   },
                                   onClick: () => {
-                                    window.toastr.success(
-                                      "Selection Copied As Fasta"
-                                    );
+                                    console.info("Selection Copied As Fasta");
                                   }
                                 },
                                 {
@@ -1303,7 +1301,7 @@ export class AlignmentView extends React.Component {
                                       );
                                   },
                                   onClick: () => {
-                                    window.toastr.success("Selection Copied");
+                                    console.info("Selection Copied");
                                   }
                                 }
                               ],

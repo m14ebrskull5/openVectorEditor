@@ -104,10 +104,10 @@ export default class SimpleCircularOrLinearViewDemo extends React.Component {
                 selectionLayer: { start: 2, end: 30 }
               }),
               partClicked: () => {
-                window.toastr.success("Part Clicked!");
+                console.info("Part Clicked!");
               },
               partRightClicked: () => {
-                window.toastr.success("Part Right Clicked!");
+                console.info("Part Right Clicked!");
               },
 
               sequenceData: {

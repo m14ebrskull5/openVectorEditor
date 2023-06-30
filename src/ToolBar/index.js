@@ -110,7 +110,6 @@ export function ToolBar(props) {
       return { toolName, toolOverride, Tool };
     });
   }, [toolList, annotationsToSupport, isProtein, onSave]);
-
   let items = flatMap(
     toolListToUse,
     ({ toolName, toolOverride, Tool }, index) => {
@@ -136,7 +135,6 @@ export function ToolBar(props) {
   if (modifyTools) {
     items = modifyTools(items);
   }
-
   return (
     <div
       className="veToolbar-outer"

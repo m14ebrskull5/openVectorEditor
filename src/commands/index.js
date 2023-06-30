@@ -45,7 +45,7 @@ const getNewTranslationHandler = (isReverse) => ({
     const annotation =
       get(ctxInfo, "context.annotation") || props.selectionLayer;
     if (!(annotation.start > -1)) {
-      return window.toastr.warning("No region found to translate");
+      return console.warn("No region found to translate");
     }
     props.upsertTranslation({
       start: annotation.start,
@@ -356,7 +356,7 @@ const noSelection = ({ selectionLayer = {} }) =>
 const triggerClipboardCommand = (type) => {
   const wrapper = document.querySelector(".veVectorInteractionWrapper");
   if (!wrapper) {
-    return window.toastr.info(`Cannot trigger a ${type} in the current view`);
+    return console.info(`Cannot trigger a ${type} in the current view`);
   }
   const hiddenInput = wrapper.querySelector("input.clipboard");
   hiddenInput.focus();
@@ -366,7 +366,7 @@ const triggerClipboardCommand = (type) => {
     const keys = { paste: "Cmd/Ctrl+V", cut: "Cmd/Ctrl+X", copy: "Cmd/Ctrl+C" };
     if (keys[type]) {
       // TODO maybe improve msg with HTML
-      window.toastr.info(`Press ${keys[type]} to ${type}`);
+      console.info(`Press ${keys[type]} to ${type}`);
     } else {
       console.warn(
         `The ${type} command did not work. document.execCommand(${type}) didn't work`
@@ -661,7 +661,7 @@ const editCommandDefs = {
         if (props.uppercaseSequenceMapFont !== "noPreference") {
           toastFired = true;
           props.updateSequenceCase("noPreference");
-          window.toastr.success(
+          console.info(
             `Sequence Case Edited Successfully. To avoid confusion we set: 'View > Sequence Case' to 'No Preference'`,
             {
               timeout: 10000
@@ -679,8 +679,7 @@ const editCommandDefs = {
           newSeq = orginalSeq[func]();
         }
         if (newSeq !== orginalSeq) {
-          !toastFired &&
-            window.toastr.success(`Sequence Case Edited Successfully`);
+          !toastFired && console.info(`Sequence Case Edited Successfully`);
           //don't trigger a mutation unless something has actually changed
           props.updateSequenceData({
             ...props.sequenceData,
@@ -710,7 +709,7 @@ const editCommandDefs = {
     isActive: (props) => props.uppercaseSequenceMapFont === "uppercase",
     handler: (props) => {
       props.updateSequenceCase("uppercase");
-      window.toastr.success(`Sequence Case View Changed`);
+      console.info(`Sequence Case View Changed`);
     },
     hotkey: "ctrl+option+plus"
   },
@@ -718,7 +717,7 @@ const editCommandDefs = {
     isActive: (props) => props.uppercaseSequenceMapFont === "noPreference",
     handler: (props) => {
       props.updateSequenceCase("noPreference");
-      window.toastr.success(`Sequence Case View Changed`);
+      console.info(`Sequence Case View Changed`);
     },
     hotkey: "ctrl+option+="
   },
@@ -726,7 +725,7 @@ const editCommandDefs = {
     isActive: (props) => props.uppercaseSequenceMapFont === "lowercase",
     handler: (props) => {
       props.updateSequenceCase("lowercase");
-      window.toastr.success(`Sequence Case View Changed`);
+      console.info(`Sequence Case View Changed`);
     },
     hotkey: "ctrl+option+-"
   },

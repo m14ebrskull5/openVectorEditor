@@ -336,14 +336,12 @@ class EnzymesDialog extends React.Component {
                               ".veNewEnzymeGroupName input"
                             ).value;
                             if (!newName) {
-                              return window.toastr.error("Invalid name");
+                              return console.error("Invalid name");
                             }
                             if (this.enzymeGroups[newName]) {
-                              window.toastr.error(
-                                "Choose a different group name"
-                              );
+                              console.error("Choose a different group name");
                             } else {
-                              window.toastr.success(
+                              console.info(
                                 "Created New Enzyme Group " + newName
                               );
                               window.createNewEnzymeGroup(newName);
@@ -387,14 +385,12 @@ class EnzymesDialog extends React.Component {
                             ".veEditEnzymeGroupName input"
                           ).value;
                           if (!newName) {
-                            return window.toastr.error("Invalid name");
+                            return console.error("Invalid name");
                           }
                           if (this.enzymeGroups[newName]) {
-                            window.toastr.error(
-                              "Choose a different group name"
-                            );
+                            console.error("Choose a different group name");
                           } else {
-                            window.toastr.success("Edit Successful");
+                            console.info("Edit Successful");
                             window.editEnzymeGroupName(
                               selectedEnzymeGroup,
                               newName
@@ -572,9 +568,7 @@ class EnzymesDialog extends React.Component {
                           );
                           this.setState({ [selectedEnzymesKey]: {} });
                           this.refreshEnzymeGroups();
-                          window.toastr.success(
-                            `${selectedCount} enzyme(s) removed`
-                          );
+                          console.info(`${selectedCount} enzyme(s) removed`);
                         }
                       }}
                       disabled={
@@ -854,7 +848,7 @@ class MoveToInner extends React.Component {
                 // });
                 refreshEnzymeGroups();
                 clearSelection();
-                window.toastr.success(
+                console.info(
                   `${selectedCount} enzyme(s) moved to ${enzymeGroupToMoveTo}`
                 );
               }}

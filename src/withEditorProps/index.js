@@ -232,11 +232,8 @@ export const importSequenceFromFile =
     const result = await anyToJson(file, { acceptParts: true, ...opts });
     // TODO maybe handle import errors/warnings better
     const failed = !result[0].success;
-
     if (failed) {
-      window.toastr.error(
-        "Error importing sequence(s). See console for more errors"
-      );
+      console.error("Error importing sequence(s). See console for more errors");
       console.error(`Seq import results:`, result);
     } else if (result.length > 1) {
       showDialog({
@@ -256,6 +253,10 @@ export const importSequenceFromFile =
 
       if (seqData) {
         seqData.stateTrackingId = shortid();
+        if (seqData.features.length === 0) {
+          seqData.features = {};
+        }
+        props.onSave({}, seqData, {}, () => {});
         updateEditor(
           {
             getState: () => ({ VectorEditor: { [props.editorName]: props } }),
@@ -265,8 +266,6 @@ export const importSequenceFromFile =
           { sequenceData: seqData }
         );
         props.flipActiveTabFromLinearOrCircularIfNecessary(seqData.circular);
-
-        window.toastr.success("Sequence Imported");
       }
     }
   };
@@ -294,7 +293,7 @@ export const exportSequenceToFile = (props) => (format) => {
   const blob = new Blob([convert(sequenceData)], { type: "text/plain" });
   const filename = `${sequenceData.name || "Untitled_Sequence"}.${fileExt}`;
   FileSaver.saveAs(blob, filename);
-  window.toastr.success("File Downloaded Successfully");
+  console.info("File Downloaded Successfully");
 };
 
 /**
@@ -420,9 +419,7 @@ export default compose(
         const { readOnly, selectionLayer, caretPosition, sequenceData } = props;
 
         if (readOnly) {
-          window.toastr.warning(
-            `Sorry, Can't Create New ${key}s in Read-Only Mode`
-          );
+          console.warn(`Sorry, Can't Create New ${key}s in Read-Only Mode`);
         } else {
           const rangeToUse =
             selectionLayer.start > -1
@@ -524,13 +521,13 @@ export default compose(
       updateSequenceData(
         getReverseComplementSequenceAndAnnotations(sequenceData)
       );
-      window.toastr.success("Reverse Complemented Sequence Successfully");
+      console.info("Reverse Complemented Sequence Successfully");
     },
 
     handleComplementSequence: (props) => () => {
       const { sequenceData, updateSequenceData } = props;
       updateSequenceData(getComplementSequenceAndAnnotations(sequenceData));
-      window.toastr.success("Complemented Sequence Successfully");
+      console.info("Complemented Sequence Successfully");
     },
     handleInverse
   })
@@ -703,7 +700,6 @@ export function getCombinedActions(
   const overrides = {};
   metaActions = {
     undo: () => {
-      window.toastr.success("Undo Successful");
       return {
         type: "VE_UNDO",
         meta: {
@@ -712,7 +708,7 @@ export function getCombinedActions(
       };
     },
     redo: () => {
-      window.toastr.success("Redo Successful");
+      console.info("Redo Successful");
       return {
         type: "VE_REDO",
         meta: {

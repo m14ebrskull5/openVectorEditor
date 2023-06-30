@@ -21,7 +21,6 @@ body,
 }
 .tgOptionContainer {
   z-index: 1000;
-  position: absolute;
   overflow-y: auto;
   left: 0px;
   padding-top: 10px;

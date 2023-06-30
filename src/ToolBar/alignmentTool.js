@@ -170,7 +170,7 @@ class AlignmentTool extends React.Component {
     //   alignmentId: alignmentId
     // });
 
-    // window.toastr.success("Alignment submitted.");
+    // console.info("Alignment submitted.");
     const seqInfoToSend = seqsToAlign;
     let server;
     if (import.meta.env.MODE === "development") {
@@ -226,7 +226,7 @@ class AlignmentTool extends React.Component {
       alignedSequences = alignmentsToRefSeq;
     }
     if (!alignedSequences && !pairwiseAlignments)
-      window.toastr.error("Error running sequence alignment!");
+      console.error("Error running sequence alignment!");
 
     //set the alignment to loading
     if (isPairwiseAlignment) {
@@ -257,7 +257,7 @@ class AlignmentTool extends React.Component {
         if (result.success) {
           array.push("addedSequences", result.parsedSequence);
         } else {
-          return window.toastr.warning("Error parsing file: ", file.name);
+          return console.warn("Error parsing file: ", file.name);
         }
       });
     });

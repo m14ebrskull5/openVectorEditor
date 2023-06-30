@@ -26,7 +26,7 @@ export default ({
           ? () => {}
           : () => {
               copyToClipboard(sequence);
-              window.toastr.success("Recognition Site Copied");
+              console.info("Recognition Site Copied");
             }
       }
       className={classNames("enzyme-rowitem", extraClasses, { noCopy })}

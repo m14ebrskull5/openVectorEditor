@@ -133,10 +133,10 @@ export default function Ladder({
                       new window.ClipboardItem({ "image/png": blob })
                     ])
                   );
-                  window.toastr.success("Image copied to clipboard!");
+                  console.info("Image copied to clipboard!");
                 });
               } catch (e) {
-                window.toastr.error(
+                console.error(
                   "Error copying the image, try just taking a screenshot instead ;)"
                 );
               }

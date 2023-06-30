@@ -14,12 +14,20 @@ public class SeqController {
         this.service = repo;
     }
 
+    /**
+     * 保存 seq
+     * @param body 要保存的seq
+     * @return 更新后的seq
+     */
     @PostMapping("/seq")
     MyResponse save(@RequestBody SeqBody body) {
         service.save(body);
-        return MyResponse.success("saved");
+        return MyResponse.success("success", service.getList());
     }
-
+    /**
+     * 請求所有seq
+     * @return 返回所有seq
+     */
     @GetMapping("/seq")
     MyResponse get() {
         return  MyResponse.success("success", service.getList());

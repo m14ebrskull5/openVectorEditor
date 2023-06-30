@@ -66,11 +66,11 @@ export const AddLaddersDialog = compose(
               );
             }
             setLadders([...additionalLadders, newLadder]);
-            window.toastr.success(`Added New Ladder ${newLadder.label}`);
+            console.info(`Added New Ladder ${newLadder.label}`);
             setSelectedLadder(newLadder.value);
           } catch (e) {
             console.error(`e:`, e);
-            window.toastr.error(
+            console.error(
               "Something went wrong with the file upload. Check the dev console for more details. Use the example file for the proper JSON format"
             );
           }

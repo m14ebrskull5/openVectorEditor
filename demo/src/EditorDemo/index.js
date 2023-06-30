@@ -10,7 +10,7 @@ import { isRangeOrPositionWithinRange } from "@teselagen/range-utils";
 
 import store from "./../store";
 import { updateEditor, actions } from "../../../src/";
-
+import { NavBar } from "./navBar";
 import Editor from "../../../src/Editor";
 import renderToggle from "./../utils/renderToggle";
 import { setupOptions, setParamsIfNecessary } from "./../utils/setupOptions";
@@ -29,8 +29,8 @@ import pluralize from "pluralize";
 import { useEffect, useState } from "react";
 import _chromData from "../../../scratch/ab1ParsedGFPvv50.json";
 import { convertBasePosTraceToPerBpTrace } from "@teselagen/bio-parsers";
+import "./benchling.css";
 const chromData = convertBasePosTraceToPerBpTrace(_chromData);
-
 const MyCustomTab = connectToEditor(({ sequenceData = {} }) => {
   //you can optionally grab additional editor data using the exported connectToEditor function
   return {
@@ -68,7 +68,7 @@ const defaultState = {
   clickOverridesExample: false,
   showAvailability: true,
   showCicularViewInternalLabels: true,
-  showDemoOptions: true,
+  showDemoOptions: false, //开启高级特性
   shouldAutosave: false,
   generatePng: false,
   allowPanelTabDraggable: true,
@@ -139,7 +139,7 @@ export default class EditorDemo extends React.Component {
           additionalFooterEls: (
             <Button
               onClick={() => {
-                // window.toastr.success("properties overrides successfull");
+                // console.info("properties overrides successfull");
               }}
             >
               propertiesProps parts footer button
@@ -161,7 +161,7 @@ export default class EditorDemo extends React.Component {
           ...items,
           {
             text: `My Part Override - ${annotation.name} - ${sequenceData.sequence.length}`
-            // onClick: () => window.toastr.success("Part Override Hit!")
+            // onClick: () => console.info("Part Override Hit!")
           }
         ];
       }
@@ -170,12 +170,12 @@ export default class EditorDemo extends React.Component {
   clickOverridesExample = {
     clickOverrides: {
       featureClicked: ({ event }) => {
-        window.toastr.success("Feature Click Override Hit!");
+        console.info("Feature Click Override Hit!");
         event.stopPropagation();
         return true; //returning truthy stops the regular click action from occurring
       },
       partClicked: () => {
-        window.toastr.success("Part Click Override Hit!");
+        console.info("Part Click Override Hit!");
         //by default (aka returning falsy) the usual click action occurs
       }
     }
@@ -218,11 +218,11 @@ export default class EditorDemo extends React.Component {
           .find((i) => i.text && i.text.includes("Export"))
           .submenu.push({
             text: "Custom export option!",
-            onClick: () => window.toastr.success("Custom export hit!")
+            onClick: () => console.info("Custom export hit!")
           });
         menuDef[3].submenu.push({
           text: "My Custom Tool"
-          // onClick: () => window.toastr.success("Some custom tool")
+          // onClick: () => console.info("Some custom tool")
         });
         return menuDef;
       }
@@ -236,14 +236,14 @@ export default class EditorDemo extends React.Component {
           name: "downloadTool",
           Icon: <Icon data-test="veDownloadTool" icon="bank-account" />,
           onIconClick: () => {
-            // window.toastr.success("Download tool hit!");
+            // console.info("Download tool hit!");
           }
         },
         {
           name: "undoTool",
           Icon: <Icon icon="credit-card" data-test="my-overridden-tool-123" />,
           onIconClick: () => {
-            // window.toastr.success("cha-ching");
+            // console.info("cha-ching");
           },
           disabled: false
         },
@@ -428,22 +428,6 @@ This feature requires beforeSequenceInsertOrDelete toggle to be true to be enabl
     ].filter((i) => i);
     return (
       <React.Fragment>
-        {/* <AutoAnnotateModal editorName={"DemoEditor"}></AutoAnnotateModal> */}
-        {/* <button onClick={() => {
-          const dragSource = document.querySelector(".veTabLinearMap")
-    const dropTarget = document.querySelector(".veTabProperties")
-          dragMock.dragStart(dragSource).dragEnter(dropTarget).dragOver(dropTarget).delay(500).dragEnd()
-        }}>click me!</button> */}
-        {/* <div style={{ width: 250 }}>
-          {renderToggle({
-            that: this,
-            alwaysShow: true,
-            type: "showDemoOptions",
-            label: "Show Demo Options",
-            hotkey: `cmd+'`
-          })}
-        </div> */}
-
         <div
           style={{
             display: "flex",
@@ -695,7 +679,7 @@ ToolBarProps: {
     {
       name: 'downloadTool',
       onIconClick: () => {
-        window.toastr.success("Download tool hit!")
+        console.info("Download tool hit!")
         }
     },
     ...etc
@@ -953,7 +937,7 @@ PropertiesProps: {
       additionalFooterEls: (
         <Button
           onClick={() => {
-            window.toastr.success(
+            console.info(
               "properties overrides successfull"
             )
           }}
@@ -1037,7 +1021,7 @@ rightClickOverrides: {
       ...items,
       {
         text: "My Part Override",
-        onClick: () => window.toastr.success("Part Override Hit!")
+        onClick: () => console.info("Part Override Hit!")
       }
     ];
   }
@@ -1759,12 +1743,12 @@ you can pass clickOverrides to the <Editor> like so:
 clickOverrides: {
   featureClicked: ({ event }) => {
     //do whatever
-    window.toastr.success("Feature Click Override Hit!");
+    console.info("Feature Click Override Hit!");
     event.stopPropagation();
     return true; //returning truthy stops the regular click action from occurring
   },
   partClicked: () => {
-    window.toastr.success("Part Click Override Hit!");
+    console.info("Part Click Override Hit!");
     //by default (aka returning falsy) the usual click action occurs
   }
 }
@@ -1926,13 +1910,13 @@ clickOverrides: {
               <br />
             </div>
           }
-
+          <NavBar />
           <Editor
             panelMap={{
               myCustomTab: MyCustomTab
             }}
             style={{
-              ...(this.state.showDemoOptions && { paddingLeft: 250 })
+              ...(this.state.showDemoOptions && { paddingLeft: 0 })
             }}
             {...this.state}
             {...(this.state.readOnly && { readOnly: true })}
@@ -1941,7 +1925,7 @@ clickOverrides: {
             })}
             editorName="DemoEditor"
             onPreviewModeFullscreenClose={() => {
-              // window.toastr.success(
+              // console.info(
               //   "onPreviewModeFullscreenClose hit -- Fullscreen Closed"
               // );
             }}
@@ -2077,7 +2061,7 @@ clickOverrides: {
             })}
             {...(this.state.overrideManageEnzymes && {
               enzymeManageOverride: () => {
-                window.toastr.success("enzyme manage override hit!");
+                console.info("enzyme manage override hit!");
               }
             })}
             {...((this.state.overrideManageEnzymes ||
@@ -2160,7 +2144,7 @@ clickOverrides: {
                   annotation,
                   annotationTypePlural
                 );
-                window.toastr.success(
+                console.info(
                   `beforeAnnotationCreate callback triggered for ${annotationTypePlural}`
                 );
               }
@@ -2183,11 +2167,21 @@ clickOverrides: {
                   headers: {
                     "Content-Type": "application/json"
                   }
-                }).then(() => {
+                }).then(async (data) => {
+                  // console.log(await data.json())
+                  const list = await data.json();
                   // console.log(data)
+                  store.dispatch({
+                    type: "navigator/list",
+                    payload: list.data
+                  });
+                  store.dispatch({
+                    type: "navigator/focus",
+                    payload: sequenceDataToSave.id
+                  });
                 });
-                console.info("editorState:", editorState);
-                // window.toastr.success("onSave callback triggered");
+                // console.info("editorState:", editorState);
+                // console.info("onSave callback triggered");
                 // To disable the save button after successful saving
                 // either call the onSuccessCallback or return a successful promise :)
                 onSuccessCallback();
@@ -2202,7 +2196,7 @@ clickOverrides: {
                 editorState,
                 onSuccessCallback
               ) {
-                window.toastr.success("onSaveAs callback triggered");
+                console.info("onSaveAs callback triggered");
                 console.info("opts:", opts);
                 console.info("sequenceData:", sequenceDataToSave);
                 console.info("editorState:", editorState);
@@ -2218,20 +2212,19 @@ clickOverrides: {
             })}
             {...(this.state.onRename && {
               onRename: (newName) =>
-                window.toastr.success("onRename callback triggered: " + newName)
+                console.info("onRename callback triggered: " + newName)
             })}
             {...(this.state.onDuplicate && {
-              onDuplicate: () =>
-                window.toastr.success("onDuplicate callback triggered")
+              onDuplicate: () => console.info("onDuplicate callback triggered")
             })}
             {...(this.state.onConfigureFeatureTypesClick && {
               onConfigureFeatureTypesClick: () => {
-                window.toastr.success("onConfigureFeatureTypesClick clicked");
+                console.info("onConfigureFeatureTypesClick clicked");
               }
             })}
             {...(this.state.onHiddenEnzymeAdd && {
               onHiddenEnzymeAdd: (e) => {
-                window.toastr.success(`onHiddenEnzymeAdd clicked -- ${e.name}`);
+                console.info(`onHiddenEnzymeAdd clicked -- ${e.name}`);
               }
             })}
             {...(this.state.withGetAdditionalCreateOpts && {
@@ -2240,7 +2233,7 @@ clickOverrides: {
                   {
                     text: "Additional Create Option",
                     onClick: () => {
-                      window.toastr.success(
+                      console.info(
                         `Selecting between ${props.selectionLayer.start} : ${props.selectionLayer.end}`
                       );
                     }
@@ -2250,21 +2243,18 @@ clickOverrides: {
             })}
             {...(this.state.onSelectionOrCaretChanged && {
               onSelectionOrCaretChanged: ({ caretPosition, selectionLayer }) =>
-                window.toastr.success(
+                console.info(
                   `onSelectionOrCaretChanged callback triggered caretPosition:${caretPosition}    selectionLayer: start: ${selectionLayer.start} end:  ${selectionLayer.end} `
                 )
             })}
             {...(this.state.onCreateNewFromSubsequence && {
               onCreateNewFromSubsequence: (selectedSeqData, props) => {
                 console.info(selectedSeqData, props);
-                window.toastr.success(
-                  "onCreateNewFromSubsequence callback triggered"
-                );
+                console.info("onCreateNewFromSubsequence callback triggered");
               }
             })}
             {...(this.state.onDelete && {
-              onDelete: () =>
-                window.toastr.success("onDelete callback triggered")
+              onDelete: () => console.info("onDelete callback triggered")
             })}
             {...(this.state.beforeSequenceInsertOrDelete && {
               beforeSequenceInsertOrDelete: (
@@ -2275,7 +2265,7 @@ clickOverrides: {
                   maintainOriginSplit: this.state.maintainOriginSplit
                 }
               ) => {
-                window.toastr.info("beforeSequenceInsertOrDelete triggered");
+                console.info("beforeSequenceInsertOrDelete triggered");
                 if (!sequenceDataToInsert.size) return; //if it is a delete, just return early
                 return {
                   //override the sequenceDataToInsert
@@ -2312,7 +2302,7 @@ clickOverrides: {
             })}
             {...(this.state.onCopy && {
               onCopy: function (/* event, copiedSequenceData, editorState */) {
-                window.toastr.success("onCopy callback triggered");
+                console.info("onCopy callback triggered");
 
                 // console.info(editorState);
                 // //the copiedSequenceData is the subset of the sequence that has been copied in the teselagen sequence format
@@ -2330,7 +2320,7 @@ clickOverrides: {
             {...(this.state.onPaste && {
               onPaste: function (event /* editorState */) {
                 //the onPaste here must return sequenceData in the teselagen data format
-                window.toastr.success("onPaste callback triggered");
+                console.info("onPaste callback triggered");
                 const clipboardData = event.clipboardData;
                 let jsonData = clipboardData.getData("application/json");
                 if (jsonData) {
@@ -2355,17 +2345,13 @@ clickOverrides: {
             shouldAutosave={shouldAutosave}
             {...(passAutoAnnotateHandlers && {
               autoAnnotateFeatures: () => {
-                window.toastr.success(
-                  "auto annotate features callback triggered"
-                );
+                console.info("auto annotate features callback triggered");
               },
               autoAnnotateParts: () => {
-                window.toastr.success("auto annotate parts callback triggered");
+                console.info("auto annotate parts callback triggered");
               },
               autoAnnotatePrimers: () => {
-                window.toastr.success(
-                  "auto annotate primers callback triggered"
-                );
+                console.info("auto annotate primers callback triggered");
               }
             })}
             {...(withAutoAnnotateAddon && {

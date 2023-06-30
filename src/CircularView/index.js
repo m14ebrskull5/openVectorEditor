@@ -1,5 +1,4 @@
 import { ZoomCircularViewSlider } from "./ZoomCircularViewSlider";
-import VeWarning from "../helperComponents/VeWarning";
 import Labels from "./Labels";
 import SelectionLayer from "./SelectionLayer";
 import Caret from "./Caret";
@@ -131,7 +130,7 @@ export function CircularView(props) {
     setZoomLevel = props.circ_setZoomLevel;
   }
   const { sequenceData = {}, smallSlider } = props;
-  const { sequence = "atgc", circular } = sequenceData;
+  const { sequence = "atgc" } = sequenceData;
 
   const sequenceLength = sequenceData.noSequence
     ? sequenceData.size
@@ -904,7 +903,7 @@ export function CircularView(props) {
             </g>
           </svg>
           <VeTopRightContainer {...{ fullScreen }}>
-            {!circular && !noWarnings && (
+            {/* {!circular && !noWarnings && (
               <VeWarning
                 key="ve-warning-circular-to-linear"
                 data-test="ve-warning-circular-to-linear"
@@ -913,7 +912,7 @@ export function CircularView(props) {
                   "Warning! You're viewing a linear sequence in the Circular Map. Click on 'Linear Map' to view the linear sequence in a more intuitive way."
                 }
               />
-            )}
+            )} */}
             {!noWarnings && paredDownMessages}
             {isZoomedIn && (
               <CircularZoomMinimap

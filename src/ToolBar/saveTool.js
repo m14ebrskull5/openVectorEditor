@@ -7,13 +7,28 @@ import { compose } from "redux";
 
 export default compose(
   connectToEditor(
-    ({ readOnly, sequenceData = {}, lastSavedId = "134%!@#%!@#%!@%" }) => {
+    ({
+      readOnly,
+      sequenceData = {},
+      lastSavedId = "134%!@#%!@#%!@%",
+      navigator
+    }) => {
+      //如果stateTrackingId是在服务器存储的状态之一，那么不应该被认为是可以保存
+      let serverSavedState = false;
+      if (
+        navigator.list.find(
+          (i) => i.stateTrackingId === sequenceData.stateTrackingId
+        )
+      ) {
+        serverSavedState = true;
+      }
       return {
         readOnly: readOnly,
         sequenceData: sequenceData,
         hasBeenSaved:
           sequenceData.stateTrackingId === "initialLoadId" ||
-          sequenceData.stateTrackingId === lastSavedId
+          sequenceData.stateTrackingId === lastSavedId ||
+          serverSavedState
       };
     }
   ),

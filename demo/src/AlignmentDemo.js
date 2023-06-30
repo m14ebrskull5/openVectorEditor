@@ -215,13 +215,13 @@ export default class AlignmentDemo extends React.Component {
                   {
                     text: "I'm an additional option",
                     className: "createDiversityRegion"
-                    // onClick: () => window.toastr.success("You did it!")
+                    // onClick: () => console.info("You did it!")
                   }
                 ]
               }),
               ...(this.state.overrideSelectionRightClick && {
                 selectionLayerRightClicked: () => {
-                  // window.toastr.success("lezzz goooo!");
+                  // console.info("lezzz goooo!");
                 }
               }),
               additionalTopEl: <Button>Additional Top El</Button>,
@@ -236,7 +236,7 @@ export default class AlignmentDemo extends React.Component {
                 : undefined,
               handleAlignmentRename: this.state.handleAlignmentRename
                 ? (newName) => {
-                    // window.toastr.success(
+                    // console.info(
                     //   `handleAlignmentRename triggered with ${newName}`
                     // );
                     this.setState({ alignmentName: newName });
@@ -253,7 +253,7 @@ export default class AlignmentDemo extends React.Component {
               shouldAutosave: this.state.shouldAutosave,
               handleAlignmentSave: this.state.shouldAutosave
                 ? () => {
-                    window.toastr.success("Autosave Triggered");
+                    console.info("Autosave Triggered");
                   }
                 : undefined,
               allowTrackRearrange: this.state.allowTrackRearrange,

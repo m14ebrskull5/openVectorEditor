@@ -164,7 +164,7 @@ class RemoveDuplicatesDialog extends React.Component {
               this.props[camelCase(`delete_${type}`).slice(0, -1)](
                 duplicatesToRemoveSelectedEntities.map((d) => d.id)
               );
-              window.toastr.success(
+              console.info(
                 `Successfully Deleted ${
                   duplicatesToRemoveSelectedEntities.length
                 } ${startCase(type)}`

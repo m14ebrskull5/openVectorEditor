@@ -37,7 +37,9 @@ export const updateSequenceData = function (seqData, ...rest) {
   //tnrtodo: currently we're not using that type variable for anything
   localStorage.setItem("currentSeq", seqData.name);
   return _updateSequenceData(
+    //不知道爲什麽要加這個?整理sequence?
     tidyUpSequenceData(seqData, { annotationsAsObjects: true }),
+    // seqData,
     ...rest
   );
 };
@@ -64,6 +66,10 @@ export default function (state, action) {
   let stateToPass = state;
   if (action.type === "SEQUENCE_DATA_UPDATE") {
     stateToPass = action.payload;
+    if (action.payload.fromServer) {
+      action.payload.fromServer = false;
+      return action.payload;
+    }
   }
   //tnr: do a clone deep here in order to make sure we are using a totally new object for undo/redo tracking
   // stateToPass = cloneDeep(stateToPass);

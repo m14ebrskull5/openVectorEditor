@@ -4,37 +4,63 @@ import { connect } from "react-redux";
 import "./app.css";
 import { compose } from "redux";
 import { connectToEditor } from "../withEditorProps";
+import dayjs from "dayjs";
 const Navigator = (props) => {
+  const [active, setActive] = useState("");
+  useEffect(() => {
+    setActive(props.focus);
+  }, [props.focus]);
+
+  const {
+    updateSequenceData,
+    flipActiveTabFromLinearOrCircularIfNecessary,
+    serverAddress,
+    list
+  } = props;
   useEffect(() => {
     const name = localStorage.getItem("currentSeq");
-    fetch(props.serverAddress + "/api/seq", {}).then(async (data) => {
+    fetch(serverAddress + "/api/seq", {}).then(async (data) => {
       data = await data.json();
-      props.list(data.data);
-      const index = data.data.find((i) => i.name === name);
+      list(data.data);
+      let index = data.data.find((i) => i.name === name);
+      if (!index && data.data.length > 0) index = data.data[0];
+      index && setActive(index.id);
       //选择最近编辑的序列
       index &&
         fetch(serverAddress + "/api/findseq?id=" + index.id).then(
           async (data) => {
             data = await data.json();
-            updateSequenceData(data.data);
+            Object.keys(data.data).forEach((i) => {
+              //不能有null
+              if (data.data[i] == null) {
+                data.data[i] = {};
+              }
+            });
+            updateSequenceData({ ...data.data, fromServer: true });
 
             flipActiveTabFromLinearOrCircularIfNecessary();
           }
         );
     });
-  }, []);
-  const {
-    updateSequenceData,
+  }, [
+    list,
+    serverAddress,
     flipActiveTabFromLinearOrCircularIfNecessary,
-    serverAddress
-  } = props;
-  const [active, setActive] = useState("");
+    updateSequenceData
+  ]);
   const chooseSeqs = (e) => {
     setActive(e.currentTarget.dataset.id);
     fetch(serverAddress + "/api/findseq?id=" + e.currentTarget.dataset.id).then(
       async (data) => {
         data = await data.json();
-        updateSequenceData(data.data);
+        Object.keys(data.data).forEach((i) => {
+          //不能有null
+          if (data.data[i] == null) {
+            data.data[i] = {};
+          }
+        });
+        //告诉redux 不要生成新的trackingStateId，正确维护save按钮的状态
+        updateSequenceData({ ...data.data, fromServer: true });
 
         flipActiveTabFromLinearOrCircularIfNecessary();
       }
@@ -97,7 +123,8 @@ const Navigator = (props) => {
                     <div>
                       <span className="sidepanelItem-subTitle">
                         <span className="sidepanelItem-subTitle-text">
-                          Last modified 2023/6/16
+                          Last modified{" "}
+                          {dayjs(i.timestamp).format("YYYY-MM-DD HH:mm:ss")}
                         </span>
                         <div className="_1tgjyx8">
                           <div
@@ -128,7 +155,8 @@ export default compose(
   connect(
     (state) => {
       return {
-        state: state.VectorEditor.DemoEditor.navigator
+        state: state.VectorEditor.DemoEditor.navigator,
+        focus: state.VectorEditor.DemoEditor.navigator.focus
       };
     },
     (dispatch) => ({

@@ -215,10 +215,10 @@ function VectorInteractionHOC(Component /* options */) {
       } = this.props;
 
       if (readOnly) {
-        return window.toastr.warning("Sorry the sequence is Read-Only");
+        return console.warn("Sorry the sequence is Read-Only");
       }
       if (!(caretPosition > -1 || selectionLayer.start > -1)) {
-        return window.toastr.warning("Please place the cursor before pasting");
+        return console.warn("Please place the cursor before pasting");
       }
 
       let seqDataToInsert;
@@ -242,14 +242,14 @@ function VectorInteractionHOC(Component /* options */) {
         noCdsTranslations: true
       });
       if (!seqDataToInsert.sequence.length)
-        return window.toastr.warning("Sorry no valid base pairs to paste");
+        return console.warn("Sorry no valid base pairs to paste");
 
       insertAndSelectHelper({
         seqDataToInsert,
         props: this.props
       });
 
-      window.toastr.success("Sequence Pasted Successfully");
+      console.info("Sequence Pasted Successfully");
       e.preventDefault();
     };
 
@@ -288,7 +288,7 @@ function VectorInteractionHOC(Component /* options */) {
         !(this.sequenceDataToCopy || {}).textToCopy &&
         !seqData.sequence.length
       )
-        return window.toastr.warning(
+        return console.warn(
           `No Sequence Selected To ${isCut && !readOnly ? "Cut" : "Copy"}`
         );
 
@@ -318,9 +318,7 @@ function VectorInteractionHOC(Component /* options */) {
         onCopy(e, seqData, this.props);
         document.body.removeEventListener("copy", this.handleCopy);
       }
-      window.toastr.success(
-        `Selection ${isCut && !readOnly ? "Cut" : "Copied"}`
-      );
+      console.info(`Selection ${isCut && !readOnly ? "Cut" : "Copied"}`);
       this.sequenceDataToCopy = undefined;
     };
     handleCut = this.handleCutOrCopy(true);
@@ -340,7 +338,7 @@ function VectorInteractionHOC(Component /* options */) {
       const sequenceLength = sequenceData.sequence.length;
       const isReplace = selectionLayer.start > -1;
       if (readOnly) {
-        window.toastr.warning("Sorry the sequence is Read-Only");
+        console.warn("Sorry the sequence is Read-Only");
       } else {
         createSequenceInputPopup({
           useEventPositioning,
@@ -357,7 +355,7 @@ function VectorInteractionHOC(Component /* options */) {
               seqDataToInsert
             });
 
-            window.toastr.success("Sequence Inserted Successfully");
+            console.info("Sequence Inserted Successfully");
           }
         });
       }

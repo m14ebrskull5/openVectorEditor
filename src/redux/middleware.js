@@ -30,7 +30,10 @@ export default (store) => (next) => (action) => {
     const stack =
       editorState.sequenceDataHistory[
         action.type === "VE_UNDO" ? "past" : "future"
-      ] || [];
+      ].filter((i) => i.sequenceData.name === editorState.sequenceData.name) ||
+      [];
+    //过滤当前sequence的历史
+    // stack = stack.filter(i => i.name ===  store.getState().VectorEditor.DemoEditor.sequenceData.name)
     const stateToUse = stack[stack.length - 1];
     store.dispatch({
       type: action.type === "VE_UNDO" ? "VE_UNDO_META" : "VE_REDO_META",
