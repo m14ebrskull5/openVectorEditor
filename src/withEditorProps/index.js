@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { compose, withHandlers, withProps } from "recompose";
 import { getFormValues /* formValueSelector */ } from "redux-form";
 import { showConfirmationDialog } from "teselagen-react-components";
-import { some, map, keyBy, omit, isArray } from "lodash";
+import { some, map, keyBy, omit } from "lodash";
 import {
   tidyUpSequenceData,
   getComplementSequenceAndAnnotations,
@@ -232,17 +232,7 @@ export const importSequenceFromFile =
     const result = await anyToJson(file, { acceptParts: true, ...opts });
     // TODO maybe handle import errors/warnings better
     const failed = !result[0].success;
-    const messages = result[0].messages;
-    if (isArray(messages)) {
-      messages.forEach((msg) => {
-        const type = msg.substr(0, 20).toLowerCase().includes("error")
-          ? failed
-            ? "error"
-            : "warning"
-          : "info";
-        window.toastr[type](msg);
-      });
-    }
+
     if (failed) {
       window.toastr.error(
         "Error importing sequence(s). See console for more errors"

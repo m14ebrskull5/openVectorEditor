@@ -363,7 +363,7 @@ function VectorInteractionHOC(Component /* options */) {
       }
     };
 
-    handleDnaDelete = (showToast = true) => {
+    handleDnaDelete = () => {
       const {
         caretPosition = -1,
         selectionLayer = { start: -1, end: -1 },
@@ -376,7 +376,7 @@ function VectorInteractionHOC(Component /* options */) {
       } = this.props;
       const sequenceLength = sequenceData.sequence.length;
       if (readOnly) {
-        return window.toastr.warning("Sorry the sequence is Read-Only");
+        return console.warn("Sorry the sequence is Read-Only");
       }
       if (sequenceLength > 0) {
         let rangeToDelete = selectionLayer;
@@ -417,7 +417,6 @@ function VectorInteractionHOC(Component /* options */) {
                 newSeqData.sequence.length
               )
         );
-        if (showToast) window.toastr.success("Sequence Deleted Successfully");
       }
     };
 
