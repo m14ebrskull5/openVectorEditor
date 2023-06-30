@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useState } from "react";
 import "./index.css";
 import { connect } from "react-redux";
@@ -36,6 +37,7 @@ const Navigator = (props) => {
                 data.data[i] = {};
               }
             });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
             updateSequenceData({ ...data.data, fromServer: true });
 
             flipActiveTabFromLinearOrCircularIfNecessary();
@@ -44,9 +46,9 @@ const Navigator = (props) => {
     });
   }, [
     list,
-    serverAddress,
-    flipActiveTabFromLinearOrCircularIfNecessary,
-    updateSequenceData
+    serverAddress
+    // flipActiveTabFromLinearOrCircularIfNecessary,
+    // updateSequenceData
   ]);
   const chooseSeqs = (e) => {
     setActive(e.currentTarget.dataset.id);

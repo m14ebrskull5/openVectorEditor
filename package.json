@@ -16,7 +16,8 @@
   "scripts": {
     "start": "vite --port 3344",
     "demo": "vite build -c vite.config.demo.mjs",
-    "local": "vite build -c vite.config.local.js"
+    "local": "vite build -c vite.config.local.js",
+    "lint": "eslint --rule 'no-ignore: 0' --rule 'react/jsx-curly-brace-presence: 1' --fix --max-warnings=0"
   },
   "dependencies": {
     "@blueprintjs/core": "3.52.0",
