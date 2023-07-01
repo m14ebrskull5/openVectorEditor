@@ -19,7 +19,6 @@ import MergeFeaturesDialog from "./helperComponents/MergeFeaturesDialog";
 import AddOrEditPartDialog from "./helperComponents/AddOrEditPartDialog";
 import AddOrEditFeatureDialog from "./helperComponents/AddOrEditFeatureDialog";
 import AddOrEditPrimerDialog from "./helperComponents/AddOrEditPrimerDialog";
-
 const Dialogs = {
   RenameSequenceDialog,
   PrintDialog,

@@ -30,6 +30,9 @@ import { useEffect, useState } from "react";
 import _chromData from "../../../scratch/ab1ParsedGFPvv50.json";
 import { convertBasePosTraceToPerBpTrace } from "@teselagen/bio-parsers";
 import "./benchling.css";
+import { NewSequenceDialog } from "./newSequenceDialog";
+import { showDialog, hideDialog } from "../../../src/GlobalDialogUtils";
+import shortid from "shortid";
 const chromData = convertBasePosTraceToPerBpTrace(_chromData);
 const MyCustomTab = connectToEditor(({ sequenceData = {} }) => {
   //you can optionally grab additional editor data using the exported connectToEditor function
@@ -2114,7 +2117,56 @@ clickOverrides: {
               }
             })}
             {...(this.state.onNew && {
-              onNew: () => {}
+              onNew: () => {
+                showDialog({
+                  ModalComponent: NewSequenceDialog,
+                  props: {
+                    onSubmit: (e) => {
+                      // e.preventDefault()
+                      hideDialog();
+                      const sequenceDataToSave = {
+                        id: shortid(),
+                        name: e.name,
+                        sequence: "ATGC",
+                        stateTrackingId: shortid()
+                      };
+                      console.info("sequenceDataToSave:", sequenceDataToSave);
+                      // console.info("sequenceData:", sequenceDataToSave);
+                      // console.log(serverAddress)
+                      sequenceDataToSave.id = window.addOnGlobals.shortid();
+                      fetch(serverAddress + "/api/seq", {
+                        method: "POST",
+                        body: JSON.stringify(sequenceDataToSave),
+                        headers: {
+                          "Content-Type": "application/json"
+                        }
+                      }).then(async (data) => {
+                        // console.log(await data.json())
+                        const list = await data.json();
+                        // console.log(data)
+                        store.dispatch({
+                          type: "navigator/list",
+                          payload: list.data
+                        });
+                        store.dispatch({
+                          type: "navigator/focus",
+                          payload: sequenceDataToSave.id
+                        });
+                        window.ove_updateEditor({
+                          sequenceData: sequenceDataToSave
+                        });
+                      });
+                    }
+                  }
+                });
+                // window.ove_updateEditor({
+                //   sequenceData: {
+                //     name: shortid(),
+                //     sequence: ""
+                //   },
+
+                // })
+              }
             })}
             {...(this.state.defaultLinkedOligoMessage && {
               defaultLinkedOligoMessage: "Custom Linked Oligo Message Here"
@@ -2156,7 +2208,6 @@ clickOverrides: {
                 editorState,
                 onSuccessCallback
               ) {
-                console.info("sequenceDataToSave:", sequenceDataToSave);
                 if (window.Cypress) window.Cypress.pngFile = opts.pngFile;
                 // console.info("sequenceData:", sequenceDataToSave);
                 // console.log(serverAddress)
