@@ -22098,7 +22098,6 @@ h3 .btn-group {
   vertical-align: middle;
 }
 .in-place-progress .spinner {
-  background: url("../img/spinner.gif") no-repeat center center transparent;
   opacity: 0.5;
 }
 .in-place-progress .glyphicon {
@@ -33286,11 +33285,7 @@ body {
   outline: none !important;
   box-shadow: 0 0 0 1pt #ff475a !important;
 }
-.ace_searchbtn_close {
-  background: url("../img/close.svg") no-repeat !important;
-  opacity: 0.4 !important;
-  background-size: contain !important;
-}
+
 .ace_searchbtn_close:hover {
   opacity: 0.7 !important;
 }
@@ -34847,7 +34842,6 @@ textarea[rows] {
   left: 0;
   bottom: 0;
   opacity: 0.8;
-  background: url("../img/spinner.gif") no-repeat center center white;
 }
 .flex-row-center {
   display: -webkit-flex;
@@ -35320,15 +35314,11 @@ textarea[rows] {
   color: #ffffff;
 }
 .land-page--full {
-  background: url("../img/landing/benchling-world-large.png") bottom right
-    #5293ff;
   background-size: cover;
   height: 100%;
 }
 @media (max-width: 1199px) {
   .land-page--full {
-    background: url("../img/landing/benchling-world-small.png") bottom right
-      #5293ff;
     background-size: cover;
   }
 }
@@ -35338,7 +35328,6 @@ textarea[rows] {
   }
 }
 .land-header {
-  background: url("../img/landing/cells.jpg") #222;
   background-size: cover;
   font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
   padding: 15px 0 0;
@@ -36517,7 +36506,6 @@ textarea#auth .sign-up-v2 select {
   height: auto;
 }
 .auth-v2 {
-  background-image: url("../img/signin_bg.png") !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
   background-position: center center !important;
@@ -55343,7 +55331,6 @@ html {
   font-family: "Inconsolata", "Courier New";
 }
 .benchicon {
-  background-image: url("../img/glyphicons.png");
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -55516,7 +55503,6 @@ html {
   margin: 40px auto;
   width: 500px;
   height: 500px;
-  background: url("../img/jeffyp-helps-scientist.png") no-repeat center;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
   only screen and (min--moz-device-pixel-ratio: 2),
@@ -55525,7 +55511,6 @@ html {
   only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
   #container-error .image-container {
-    background-image: url("../img/jeffyp-helps-scientist@2x.png");
     background-size: 500px 324px;
   }
 }
@@ -56342,8 +56327,6 @@ body.dragging .drop-emphasis {
   background: #c9d8db;
 }
 #auto-annotation .search-throbber {
-  background: url("../img/search-spinner.gif") center center no-repeat
-    transparent;
   height: 30px;
 }
 .version-row {
@@ -57205,7 +57188,6 @@ tbody.editable-table .editable-check.focus {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url("../img/spinner.gif") center center no-repeat transparent;
 }
 #buffers .buffer-container .pan-controls {
   width: 100px;

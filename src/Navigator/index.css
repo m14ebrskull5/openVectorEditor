@@ -22047,7 +22047,6 @@ h3 .btn-group {
   vertical-align: middle;
 }
 .in-place-progress .spinner {
-  background: url("../img/spinner.gif") no-repeat center center transparent;
   opacity: 0.5;
 }
 .in-place-progress .glyphicon {
@@ -33235,11 +33234,7 @@ body {
   outline: none !important;
   box-shadow: 0 0 0 1pt #ff475a !important;
 }
-.ace_searchbtn_close {
-  background: url("../img/close.svg") no-repeat !important;
-  opacity: 0.4 !important;
-  background-size: contain !important;
-}
+
 .ace_searchbtn_close:hover {
   opacity: 0.7 !important;
 }
@@ -35269,15 +35264,11 @@ textarea[rows] {
   color: #ffffff;
 }
 .land-page--full {
-  background: url("../img/landing/benchling-world-large.png") bottom right
-    #5293ff;
   background-size: cover;
   height: 100%;
 }
 @media (max-width: 1199px) {
   .land-page--full {
-    background: url("../img/landing/benchling-world-small.png") bottom right
-      #5293ff;
     background-size: cover;
   }
 }
@@ -45859,7 +45850,6 @@ input.tagEditorDropdown-input-value {
 .callToActionScreen-productDescription ul {
   list-style: none;
   margin-left: 0;
-  parding-left: 0;
 }
 .callToActionScreen-productDescription li {
   margin-bottom: 4px;
