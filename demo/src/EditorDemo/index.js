@@ -33,6 +33,7 @@ import "./benchling.css";
 import { NewSequenceDialog } from "./newSequenceDialog";
 import { showDialog, hideDialog } from "../../../src/GlobalDialogUtils";
 import shortid from "shortid";
+
 const chromData = convertBasePosTraceToPerBpTrace(_chromData);
 const MyCustomTab = connectToEditor(({ sequenceData = {} }) => {
   //you can optionally grab additional editor data using the exported connectToEditor function
@@ -2136,6 +2137,8 @@ clickOverrides: {
                       sequenceDataToSave.id = window.addOnGlobals.shortid();
                       fetch(serverAddress + "/api/seq", {
                         method: "POST",
+                        mode: "cors",
+                        credentials: "include",
                         body: JSON.stringify(sequenceDataToSave),
                         headers: {
                           "Content-Type": "application/json"
@@ -2214,6 +2217,8 @@ clickOverrides: {
                 sequenceDataToSave.id = window.addOnGlobals.shortid();
                 fetch(serverAddress + "/api/seq", {
                   method: "POST",
+                  mode: "cors",
+                  credentials: "include",
                   body: JSON.stringify(sequenceDataToSave),
                   headers: {
                     "Content-Type": "application/json"
@@ -2386,6 +2391,16 @@ clickOverrides: {
                 return sequenceData;
               }
             })}
+            onViewHistory={(e) => {
+              fetch(
+                serverAddress + "/api/findseq?id=" + e.currentTarget.dataset.id
+              ).then(async (data) => {
+                data = await data.json();
+                window.ove_updateEditor({
+                  sequenceData: { ...data.data, fromServer: true }
+                });
+              });
+            }}
             handleFullscreenClose={
               !withPreviewMode && this.changeFullscreenMode
             } //don't pass this handler if you're also using previewMode

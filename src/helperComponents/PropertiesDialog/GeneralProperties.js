@@ -4,6 +4,7 @@ import {
   BPSelect,
   TextareaField
 } from "teselagen-react-components";
+import dayjs from "dayjs";
 import { reduxForm } from "redux-form";
 import withEditorProps from "../../withEditorProps";
 import { compose } from "recompose";
@@ -127,6 +128,23 @@ class GeneralProperties extends React.Component {
           defaultValue={description}
           disabled={readOnly}
         />
+        <div className="ve-flex-row">
+          <div className="ve-column-left bp3-label">History</div>
+          {/* {
+              JSON.stringify(sequenceData.history)
+              
+            } */}
+        </div>
+        {sequenceData.history.map((i) => {
+          //eslint-disable
+          return (
+            <div data-id={i._id} onClick={this.props.onViewHistory} key={i._id}>
+              {i._id}{" "}
+              <span>{dayjs(i.timestamp).format("YYYY-MM-DD HH:mm:ss")}</span>{" "}
+              {i.size}bps
+            </div>
+          );
+        })}
       </React.Fragment>
     );
   }

@@ -838,6 +838,15 @@ function VectorInteractionHOC(Component /* options */) {
             ...fullSequenceTranslationMenu,
             text: "View Full Sequence Translations"
           }
+          // {
+          //   text: 'Remove'
+          // },
+          // {
+          //   text: 'View History',
+          //   onClick: () => {
+          //     console.info(this.props)
+          //   }
+          // }
         ];
         menu._event = event;
         return menu;

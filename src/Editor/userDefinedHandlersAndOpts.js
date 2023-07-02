@@ -14,6 +14,7 @@ export const userDefinedHandlersAndOpts = [
   "allPartTags",
   "editTagsLink",
   "readOnly",
+  "onViewHistory",
   "shouldAutosave",
   "hideSingleImport",
   "beforeAnnotationCreate",

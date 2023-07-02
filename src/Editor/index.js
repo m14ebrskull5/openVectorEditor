@@ -151,6 +151,7 @@ export class Editor extends React.Component {
     if (
       this.props.shouldAutosave &&
       prevProps.sequenceData &&
+      !this.props.sequenceData.fromServer &&
       prevProps.sequenceData.stateTrackingId &&
       this.props.sequenceData.stateTrackingId !==
         prevProps.sequenceData.stateTrackingId

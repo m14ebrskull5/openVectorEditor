@@ -6,8 +6,8 @@ import {
 } from "teselagen-react-components";
 import { transform, isEqual, isObject } from "lodash";
 
-export function setupOptions({ that, defaultState, props }) {
-  const editorDemoState = getCurrentParamsFromUrl(props.history.location);
+export function setupOptions({ that, defaultState }) {
+  const editorDemoState = getCurrentParamsFromUrl("/editor");
   // localStorage.editorDemoState = props.history.location.search;
   const massagedEditorDemoState = Object.keys(editorDemoState).reduce(
     (acc, key) => {
@@ -67,7 +67,7 @@ export function setParamsIfNecessary({ that, defaultState }) {
  */
 function difference(object, base) {
   function changes(object, base) {
-    return transform(object, function(result, value, key) {
+    return transform(object, function (result, value, key) {
       if (!isEqual(value, base[key])) {
         result[key] =
           isObject(value) && isObject(base[key])
