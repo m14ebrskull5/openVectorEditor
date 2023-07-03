@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import { connect } from "react-redux";
 import "./app.css";

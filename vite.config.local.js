@@ -37,8 +37,10 @@ export default defineConfig({
         manualChunks: {
           teselagen: ['@teselagen/bio-parsers', '@teselagen/file-utils', '@teselagen/range-utils', '@teselagen/react-list', '@teselagen/react-table', '@teselagen/sequence-utils'],
           dayjs: ['dayjs'],
-          vendor: ['react', 'react-dom', 'redux', 'lodash', '@blueprintjs/colors', '@blueprintjs/core', '@blueprintjs/datetime', '@blueprintjs/icons']
-        }
+          vendor: ['react', 'react-dom', 'redux', 'axios', 'lodash', 'lodash-es', '@blueprintjs/colors', '@blueprintjs/core', '@blueprintjs/datetime', '@blueprintjs/icons'],
+          teselagenreactcomponents: [
+            'teselagen-react-components'
+          ]}
       }
     },
     commonjsOptions: {
