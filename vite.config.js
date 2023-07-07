@@ -23,7 +23,7 @@ export default defineConfig({
       "/api": 'http://localhost:8081',
       "/login": 'http://localhost:8081',
       "/logout": 'http://localhost:8081',
-
+      "/align": "http://localhost:8080"
     },
 
   },

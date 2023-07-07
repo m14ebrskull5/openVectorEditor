@@ -174,9 +174,9 @@ class AlignmentTool extends React.Component {
     const seqInfoToSend = seqsToAlign;
     let server;
     if (import.meta.env.MODE === "development") {
-      server = "http://127.0.0.1:8080/";
+      server = "/align";
     } else {
-      server = "http://62.234.98.190:8080/";
+      server = "/align";
     }
     let {
       alignedSequences: _alignedSequences,

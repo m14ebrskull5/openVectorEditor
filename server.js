@@ -49,7 +49,7 @@ app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors());
 app.use(bodyParser.json())
 // respond with "hello world" when a GET request is made to the homepage
-app.post('/', function (req, res) {
+app.post('/align', function (req, res) {
     const file = "./seq/" + uuidv4() + '.fasta';
     saveSeq(req.body.sequencesToAlign, file)
     const output = runMuscle(file)
@@ -82,4 +82,4 @@ app.post('/', function (req, res) {
     })
 })
 
-app.listen(8080)
+app.listen(8082)

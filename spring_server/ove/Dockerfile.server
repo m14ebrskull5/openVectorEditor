@@ -1,0 +1,7 @@
+FROM openjdk:17
+
+COPY . /opt
+
+WORKDIR /opt
+
+CMD ["java" ,"-jar" ,"/opt/build/libs/ove-0.0.1-SNAPSHOT.jar"]
