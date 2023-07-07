@@ -2,7 +2,7 @@ import { compose } from "redux";
 import { reduxForm, Field } from "redux-form";
 import { Button } from "@blueprintjs/core";
 import { wrapDialog } from "teselagen-react-components";
-
+import React from "react";
 const NewSequence = ({ onSubmit, handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit((vals) => onSubmit(vals))}>
